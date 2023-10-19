@@ -44,7 +44,7 @@ const Router = (props) => {
         },
         {
           ...(routes.find((route) => route.path === '/') || routes[0]),
-          path: '/*',
+          path: '/*'
         }
       ])
     }
