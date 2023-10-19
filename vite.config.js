@@ -4,7 +4,6 @@ import { defineConfig, splitVendorChunkPlugin, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react-swc'
 import { viteMockServe } from 'vite-plugin-mock'
 import { sync } from 'glob'
-import { trimEnd } from 'lodash-es'
 import { version, name } from './package.json'
 
 const outDir = resolve(__dirname, 'dist')
@@ -63,7 +62,7 @@ export default ({ mode }) => {
                   return
                 }
 
-                sessionStorage.setItem('redirectPath', trimEnd(pathname, '/'))
+                sessionStorage.setItem('redirectPath', pathname.slice(0, -1))
                 window.location.href = isFolderPath ? '../' : './'
               </script>
             `
