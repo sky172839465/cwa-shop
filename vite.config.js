@@ -54,7 +54,7 @@ export default ({ mode }) => {
                 const pathname = window.location.pathname
                 const isFolderPath = pathname.endsWith('/')
                 const isRouteExist = (
-                  window.location.pathname.replace('/${name}', '').split('/').length <= 3
+                  pathname.replace('/${name}', '').split('/').length <= 3
                 )
                 console.log(pathname)
                 if (!isRouteExist) {
