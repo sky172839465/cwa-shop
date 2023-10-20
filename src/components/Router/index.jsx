@@ -43,8 +43,8 @@ const Router = (props) => {
           element: SkeletonHome
         },
         {
-          ...(routes.find((route) => route.path === '/') || routes[0]),
-          path: `${basename === '/' ? '' : basename}/*`
+          path: '/*',
+          element: ErrorElement
         }
       ])
     }
