@@ -24,7 +24,7 @@ const CartBottomItems = (props) => {
       <li key='totalPrice'>
         <span>{`Total price: ${totalPrice} ${t('currency')}`}</span>
       </li>
-      <Link to='/confirm'>
+      <Link to='/confirm/'>
         <button
           type='button'
           className={clx(
