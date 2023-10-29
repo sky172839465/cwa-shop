@@ -2,7 +2,6 @@ import { isEmpty } from 'lodash-es'
 import mockFetcher from './mockFetcher'
 
 const fetcher = async (config = {}, triggerArgs = {}) => {
-  console.log(window.TARGET_ENV)
   const isForceDisableMock = !!(new URLSearchParams(window.location.search)).get('mock')
   const { arg: { url: keyFromTrigger = '', ...body } = {} } = triggerArgs
   const { host = '', url: keyFromGet = '', options = {} } = config
