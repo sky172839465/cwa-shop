@@ -18,7 +18,10 @@ const links = flow(
 
     return path.replace('./', '/').replace('index.html', '')
   }),
-  (endpoints) => endpoints.map((endpoint) => ({ url: `${window.APP_BASENAME}${endpoint}`, name: endpoint.replace(/\//g, '') }))
+  (endpoints) => endpoints.map((endpoint) => ({
+    url: `${window.APP_BASENAME}${endpoint}`,
+    name: endpoint.replace(/\.\/|\//g, '')
+  }))
 )()
 
 window.sessionStorage.removeItem('redirectPath')
