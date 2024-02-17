@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom/client'
-import { flow, keys } from 'lodash-es'
+import { flow, keys, isEmpty } from 'lodash-es'
 import Root from '../components/Root'
 import PortalWithLinks from '../components/Portal/WithLinks'
 
@@ -26,6 +26,16 @@ const links = flow(
 )()
 
 window.sessionStorage.removeItem('redirectPath')
+
+const { pathname, search } = window.location
+const targetRouter = links.find((link) => pathname.startsWith(`/${link.name}/`))
+if (!isEmpty(targetRouter)) {
+  const nextPathName = window.location.href
+    .replace(window.location.search, '')
+    .replace(pathname, `/${targetRouter.name}/`)
+  sessionStorage.setItem('redirectPath', `${pathname}${search}`)
+  window.location.href = nextPathName
+}
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Root>
