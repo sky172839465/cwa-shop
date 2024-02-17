@@ -17,6 +17,7 @@ import Dropzone from '../../../../components/Dropzone'
 import ACCEPT from '../../../../components/Dropzone/accept'
 import FormRow from '../../../../components/Form/FormRow'
 import FocusError from '../../../../components/Form/FocusError'
+import FormLayout from '../../../../components/Form/Layout'
 
 const putImageHost = getApiHost('VITE_AWS_PUT_IMAGE_HOST')
 const putImageEndPoint = `${import.meta.env.VITE_AWS_HOST_PREFIX}/putimage`
@@ -120,7 +121,7 @@ const Product = () => {
     >
       {({ errors, touched }) => (
         <Form>
-          <div className='m-auto flex w-full flex-col max-lg:m-auto max-lg:max-w-2xl max-sm:min-w-full max-sm:p-4 sm:p-12 lg:max-w-5xl'>
+          <FormLayout>
             <FormRow
               label={`${t('fishType')}`}
               error={touched[FORM.TYPE] && errors[FORM.TYPE]}
@@ -196,7 +197,7 @@ const Product = () => {
                 {`${t('newItem')}`}
               </button>
             </div>
-          </div>
+          </FormLayout>
           <FocusError />
         </Form>
       )}
