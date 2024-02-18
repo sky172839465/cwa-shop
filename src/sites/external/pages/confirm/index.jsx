@@ -193,7 +193,7 @@ const Page = () => {
                   <th>
                     <button
                       type='button'
-                      className='btn btn-square btn-error btn-outline'
+                      className='btn btn-square btn-outline btn-error'
                       onClick={onRemove(selectedProduct)}
                       disabled={isUpdating}
                     >
@@ -226,7 +226,7 @@ const Page = () => {
               <th className='space-y-2'>
                 <button
                   type='button'
-                  className='btn btn-success btn-outline'
+                  className='btn btn-outline btn-success'
                   disabled={isUpdating}
                   onClick={onOrder}
                 >
@@ -235,7 +235,7 @@ const Page = () => {
                 <br />
                 <button
                   type='button'
-                  className='btn btn-error btn-outline'
+                  className='btn btn-outline btn-error'
                   onClick={onRemoveAll}
                   disabled={isUpdating}
                 >
