@@ -102,11 +102,11 @@ const Modal = (props) => {
         {!isUndefined(title) && (
           <h3 className='text-lg font-bold'>{title}</h3>
         )}
-        {children}
+        {visible ? children : null}
         {
           (isCloseBtnVisible || isOkBtnVisible) && (
             <div className='modal-action'>
-              <form method='dialog'>
+              <form method='dialog' className='space-x-2'>
                 {/* if there is a button in form, it will close the modal */}
                 <button type='submit' className='btn' onClick={onModalClose}>Close</button>
                 <button type='submit' className='btn' onClick={onModalOk}>Ok</button>

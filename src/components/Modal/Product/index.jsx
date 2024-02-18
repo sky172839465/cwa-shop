@@ -96,11 +96,6 @@ const ProductModal = (props) => {
     setSlideIndex(0)
   }
 
-  const onModalClose = () => {
-    setSlideIndex(-1)
-    onClose && onClose()
-  }
-
   if (isLoading || isMutating) {
     return (
       <Modal
@@ -129,7 +124,7 @@ const ProductModal = (props) => {
         'max-sm:overflow-y-hidden'
       )}
       isCloseBtnVisible={false}
-      onClose={onModalClose}
+      onClose={onClose}
       onOpen={onOpen}
     >
       <Slider
@@ -152,7 +147,7 @@ const ProductModal = (props) => {
         infinite
         dots
       >
-        {(!isEmpty(itemVideos) && slideIndex !== -1) && (
+        {!isEmpty(itemVideos) && (
           <div className='max-h-[100vh] max-w-full'>
             <div className='m-auto max-w-screen-lg'>
               <Video
