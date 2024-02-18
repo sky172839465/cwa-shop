@@ -6,7 +6,9 @@ import useRowInfo from './useRowInfo'
 // const aaa = { isLoading: false, data: {} }
 
 const TableRow = (props) => {
-  const { item, index, onRemove } = props
+  const {
+    item, index, onRemove, onEdit
+  } = props
   const { isLoading, data } = useRowInfo(item.url)
   // const { isLoading, data } = aaa
   // console.log(res)
@@ -36,7 +38,7 @@ const TableRow = (props) => {
           type='button'
           className='btn btn-square'
           disabled={isLoading}
-          // onClick={() => onRemove(index)}
+          onClick={() => onEdit({ index, item, data })}
         >
           <MdEdit size='1.5em' />
         </button>

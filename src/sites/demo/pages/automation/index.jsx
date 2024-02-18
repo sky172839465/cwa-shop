@@ -42,7 +42,7 @@ const Automation = () => {
               </span>
             </div>
             <FormRow
-              label={`${t('video')}`}
+              label={t('video')}
               error={touched[FORM.VIDEOS] && errors[FORM.VIDEOS]}
             >
               <Dropzone
@@ -59,7 +59,7 @@ const Automation = () => {
                 // disabled={isMutating}
               >
                 <MdAdd size='1.5em' />
-                {`${t('newItem')}`}
+                {t('newItem')}
               </button>
             </div>
             <FocusError />
