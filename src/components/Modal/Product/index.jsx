@@ -13,6 +13,7 @@ import wait from '../../../utils/wait'
 import useFishInfo from '../../../hooks/useFishInfo'
 import LazyImage from '../../LazyImage'
 import Video from '../../Video'
+import getVideoJsOptions from '../../Video/getVideoJsOptions'
 import Modal from '../index'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
@@ -37,18 +38,9 @@ const SliderArrow = (props) => {
   )
 }
 
-const getVideoJsOptions = (itemVideos) => {
-  return {
-    autoplay: false,
-    controls: true,
-    fill: true,
-    responsive: true,
-    fluid: true,
-    sources: [{
-      src: get(itemVideos, '[0].productVideo'),
-      type: 'video/mp4'
-    }]
-  }
+const getOptions = (itemVideos) => {
+  const src = get(itemVideos, '[0].productVideo')
+  return getVideoJsOptions({ src })
 }
 
 const ProductModal = (props) => {
@@ -101,15 +93,13 @@ const ProductModal = (props) => {
       <Modal
         modalRef={modalRef}
         id={id}
-        className={clx(
-          'h-full min-h-full w-full max-w-[100vw] rounded-none p-0'
-        )}
         isCloseBtnVisible={false}
         onClose={onClose}
         onOpen={onOpen}
+        isFullSize
       >
         <Skeleton
-          className='fixed mt-[10vh] h-[80vh] w-[100vw]'
+          className='absolute left-0 top-[10vh] h-[80vh] w-full'
         />
       </Modal>
     )
@@ -119,16 +109,13 @@ const ProductModal = (props) => {
     <Modal
       modalRef={modalRef}
       id={id}
-      className={clx(
-        'h-full min-h-full w-full max-w-[100vw] rounded-none p-0',
-        'max-sm:overflow-y-hidden'
-      )}
-      isCloseBtnVisible={false}
       onClose={onClose}
       onOpen={onOpen}
+      isCloseBtnVisible={false}
+      isFullSize
     >
       <Slider
-        className='top-[50%] translate-y-[-50%]'
+        className='translate-y-[6%]'
         dotsClass='slick-dots bottom-[0.8rem!important]'
         prevArrow={(
           <SliderArrow customClassName='left-2'>
@@ -151,7 +138,7 @@ const ProductModal = (props) => {
           <div className='max-h-[100vh] max-w-full'>
             <div className='m-auto max-w-screen-lg'>
               <Video
-                options={getVideoJsOptions(itemVideos)}
+                options={getOptions(itemVideos)}
                 onReady={onPlayerReady}
               />
             </div>

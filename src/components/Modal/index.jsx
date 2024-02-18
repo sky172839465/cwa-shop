@@ -14,6 +14,7 @@ const Modal = (props) => {
     title,
     children,
     className,
+    isFullSize = false,
     isOkBtnVisible = false,
     isCloseBtnVisible = true,
     onClose,
@@ -84,7 +85,10 @@ const Modal = (props) => {
     <dialog id={id} className='modal'>
       <div
         className={clx(
-          'modal-box',
+          'modal-box p-0',
+          {
+            'h-full min-h-full w-full max-w-[100vw] rounded-none max-sm:overflow-y-hidden': isFullSize
+          },
           { [className]: className },
           { hidden: !visible }
         )}
@@ -100,12 +104,25 @@ const Modal = (props) => {
           </button>
         </form>
         {!isUndefined(title) && (
-          <h3 className='text-lg font-bold'>{title}</h3>
+          <h3 className='px-6 pt-6 text-lg font-bold'>{title}</h3>
         )}
-        {visible ? children : null}
+        {
+          visible
+            ? (
+              <div
+                className={clx(
+                  'px-6',
+                  { 'overflow-y-auto max-h-[65vh]': !isFullSize }
+                )}
+              >
+                {children}
+              </div>
+            )
+            : null
+        }
         {
           (isCloseBtnVisible || isOkBtnVisible) && (
-            <div className='modal-action'>
+            <div className='modal-action px-6 pb-6'>
               <form method='dialog' className='space-x-2'>
                 {/* if there is a button in form, it will close the modal */}
                 <button type='submit' className='btn' onClick={onModalClose}>Close</button>
