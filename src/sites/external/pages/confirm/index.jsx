@@ -1,4 +1,4 @@
-import { Suspense, useState } from 'react'
+import { Suspense, useState, useRef } from 'react'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 import { useTranslation } from 'react-i18next'
 import { MdDelete } from 'react-icons/md'
@@ -28,6 +28,7 @@ const orderEndPoint = `${import.meta.env.VITE_AWS_HOST_PREFIX}/fishorder`
 const productModalKey = 'productModal'
 
 const Page = () => {
+  const modalRef = useRef()
   const navigate = useNavigate()
   const { i18n } = useTranslation()
   const { t } = useTranslation()
@@ -35,7 +36,6 @@ const Page = () => {
   const [selectedProducts, setSelectedProducts] = useRecoilState(selectedProductsState)
   const setOrderData = useSetRecoilState(orderDataState)
   const [targetProduct, setTargetProduct] = useState({})
-  const [isProductModalOpen, setIsProductModalOpen] = useState(false)
   const defaultSelectedProducts = useAsyncValue()
   const { trigger: reserveByItemSerial, isMutating: isReserving } = useCreate(preOrderHost)
   const { trigger: orderByItemSerial, isMutating: isOrdering } = useCreate(orderHost)
@@ -61,11 +61,8 @@ const Page = () => {
 
   const openProductModal = (newTargetProduct) => async () => {
     setTargetProduct(newTargetProduct)
-    setIsProductModalOpen(true)
-    document.querySelector(`#${productModalKey}`).showModal()
+    modalRef.current.open()
   }
-
-  const closeProductModal = () => setIsProductModalOpen(false)
 
   const onRemove = (product) => async () => {
     const toastId = toast.loading('Updating...')
@@ -247,9 +244,8 @@ const Page = () => {
         </table>
       </div>
       <ProductModal
+        modalRef={modalRef}
         id={productModalKey}
-        visible={isProductModalOpen}
-        onClose={closeProductModal}
         product={targetProduct}
         fishTypeMap={fishTypeMap}
       />

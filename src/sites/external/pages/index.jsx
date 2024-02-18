@@ -1,7 +1,8 @@
 import {
   Suspense,
   useMemo,
-  useState
+  useState,
+  useRef
 } from 'react'
 import {
   Await, useLoaderData, useAsyncValue, useSearchParams
@@ -76,7 +77,7 @@ const SelectSection = () => {
 
 const CardsSection = (props) => {
   const {
-    setIsProductModalOpen,
+    openModal,
     setTargetProduct
   } = props
   const [searchParams] = useSearchParams()
@@ -100,8 +101,7 @@ const CardsSection = (props) => {
 
   const openProductModal = (newTargetProduct) => async () => {
     setTargetProduct({ ...newTargetProduct, fishType })
-    setIsProductModalOpen(true)
-    document.querySelector(`#${productModalKey}`).showModal()
+    openModal()
   }
 
   const onSelectProduct = (product) => async (e) => {
@@ -195,12 +195,10 @@ const CardsSection = (props) => {
 }
 
 const Home = () => {
-  const [isProductModalOpen, setIsProductModalOpen] = useState(false)
+  const modalRef = useRef()
   const [targetProduct, setTargetProduct] = useState({})
   const [selectProducts] = useRecoilState(selectedProductsState)
   const data = useLoaderData()
-
-  const closeProductModal = () => setIsProductModalOpen(false)
 
   return (
     <Drawer
@@ -237,7 +235,7 @@ const Home = () => {
               )}
             >
               <CardsSection
-                setIsProductModalOpen={setIsProductModalOpen}
+                openModal={() => modalRef.current.open()}
                 setTargetProduct={setTargetProduct}
               />
             </Await>
@@ -246,9 +244,8 @@ const Home = () => {
       </div>
       <Suspense fallback={<SkeletonHome />}>
         <ProductModal
+          modalRef={modalRef}
           id={productModalKey}
-          visible={isProductModalOpen}
-          onClose={closeProductModal}
           product={targetProduct}
         />
       </Suspense>
