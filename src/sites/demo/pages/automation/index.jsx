@@ -48,16 +48,11 @@ const Automation = () => {
               <Dropzone
                 name={FORM.VIDEOS}
                 accept={ACCEPT.VIDEO}
+                // maxSize={100}
                 // disabled={isMutating}
               />
             </FormRow>
             <div className='text-right'>
-              <button
-                type='reset'
-                className='hidden'
-              >
-                reset
-              </button>
               <button
                 type='submit'
                 className='btn btn-outline'
