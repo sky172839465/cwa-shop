@@ -12,7 +12,7 @@ import Slider from 'react-slick'
 import useFishInfo from '../../../hooks/useFishInfo'
 import LazyImage from '../../LazyImage'
 import Video from '../../Video'
-import Model from '../index'
+import Modal from '../index'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import wait from '../../../utils/wait'
@@ -53,7 +53,7 @@ const getVideoJsOptions = (itemVideos) => {
   }
 }
 
-const ProductModel = (props) => {
+const ProductModal = (props) => {
   const {
     id, visible, onClose, product = {}
   } = props
@@ -125,7 +125,7 @@ const ProductModel = (props) => {
 
   if (isLoading || isMutating) {
     return (
-      <Model
+      <Modal
         id={id}
         className={clx(
           'h-full min-h-full w-full max-w-[100vw] rounded-none p-0',
@@ -137,12 +137,12 @@ const ProductModel = (props) => {
         <Skeleton
           className='fixed mt-[10vh] h-[80vh] w-[100vw]'
         />
-      </Model>
+      </Modal>
     )
   }
 
   return (
-    <Model
+    <Modal
       id={id}
       className={clx(
         'h-full min-h-full w-full max-w-[100vw] rounded-none p-0',
@@ -211,8 +211,8 @@ const ProductModel = (props) => {
           <MdOpenInNew size='1.5rem' />
         </a>
       )}
-    </Model>
+    </Modal>
   )
 }
 
-export default ProductModel
+export default ProductModal

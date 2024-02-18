@@ -18,14 +18,14 @@ import useOnInit from '../../../../hooks/useOnInit'
 import useCreate from '../../../../hooks/useCreate'
 import SkeletonHome from '../../../../components/Skeleton/Home'
 import LazyImage from '../../../../components/LazyImage'
-import ProductModel from '../../../../components/Model/Product'
+import ProductModal from '../../../../components/Modal/Product'
 
 const preOrderHost = getApiHost('VITE_AWS_FISH_PREORDER')
 const preOrderEndPoint = `${import.meta.env.VITE_AWS_HOST_PREFIX}/bettafishpreorder`
 const orderHost = getApiHost('VITE_AWS_FISH_ORDER')
 const orderEndPoint = `${import.meta.env.VITE_AWS_HOST_PREFIX}/fishorder`
 
-const productModelKey = 'productModel'
+const productModalKey = 'productModal'
 
 const Page = () => {
   const navigate = useNavigate()
@@ -62,7 +62,7 @@ const Page = () => {
   const openProductModal = (newTargetProduct) => async () => {
     setTargetProduct(newTargetProduct)
     setIsProductModalOpen(true)
-    document.querySelector(`#${productModelKey}`).showModal()
+    document.querySelector(`#${productModalKey}`).showModal()
   }
 
   const closeProductModal = () => setIsProductModalOpen(false)
@@ -246,8 +246,8 @@ const Page = () => {
           </tbody>
         </table>
       </div>
-      <ProductModel
-        id={productModelKey}
+      <ProductModal
+        id={productModalKey}
         visible={isProductModalOpen}
         onClose={closeProductModal}
         product={targetProduct}

@@ -24,13 +24,13 @@ import useCreate from '../../../hooks/useCreate'
 import useOnInit from '../../../hooks/useOnInit'
 import getApiHost from '../../../utils/getApiHost'
 import Card from '../../../components/Card'
-import ProductModel from '../../../components/Model/Product'
+import ProductModal from '../../../components/Modal/Product'
 import SkeletonHome from '../../../components/Skeleton/Home'
 import Drawer from '../../../components/Drawer'
 import CartItems from '../../../components/CartItems'
 import CartBottomItems from '../../../components/CartBottomItems'
 
-const productModelKey = 'productModel'
+const productModalKey = 'productModal'
 
 const preOrderHost = getApiHost('VITE_AWS_FISH_PREORDER')
 const preOrderEndPoint = `${import.meta.env.VITE_AWS_HOST_PREFIX}/bettafishpreorder`
@@ -101,7 +101,7 @@ const CardsSection = (props) => {
   const openProductModal = (newTargetProduct) => async () => {
     setTargetProduct({ ...newTargetProduct, fishType })
     setIsProductModalOpen(true)
-    document.querySelector(`#${productModelKey}`).showModal()
+    document.querySelector(`#${productModalKey}`).showModal()
   }
 
   const onSelectProduct = (product) => async (e) => {
@@ -245,8 +245,8 @@ const Home = () => {
         </div>
       </div>
       <Suspense fallback={<SkeletonHome />}>
-        <ProductModel
-          id={productModelKey}
+        <ProductModal
+          id={productModalKey}
           visible={isProductModalOpen}
           onClose={closeProductModal}
           product={targetProduct}

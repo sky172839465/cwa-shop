@@ -2,7 +2,7 @@ import { MdOutlineClose } from 'react-icons/md'
 import { isUndefined } from 'lodash-es'
 import clx from 'classnames'
 
-const Model = (props) => {
+const Modal = (props) => {
   const {
     id,
     title,
@@ -51,4 +51,4 @@ const Model = (props) => {
   )
 }
 
-export default Model
+export default Modal
