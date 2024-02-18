@@ -6,7 +6,7 @@ import clx from 'classnames'
 import { MdArrowForwardIos, MdArrowBackIosNew, MdOpenInNew } from 'react-icons/md'
 import Skeleton from 'react-loading-skeleton'
 import {
-  delay, get, isEmpty
+  get, isEmpty
 } from 'lodash-es'
 import Slider from 'react-slick'
 import useFishInfo from '../../../hooks/useFishInfo'
@@ -15,6 +15,7 @@ import Video from '../../Video'
 import Model from '../index'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
+import wait from '../../../utils/wait'
 
 const ESC_KEY_CODE = 27
 
@@ -96,7 +97,7 @@ const ProductModel = (props) => {
       return
     }
 
-    await delay(() => Promise.resolve(), 100)
+    await wait(100)
     onClose()
   }, [onClose])
 
