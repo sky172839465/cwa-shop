@@ -15,7 +15,7 @@ const links = flow(
 
 const Demo = () => {
   return (
-    <Portal>
+    <Portal isFixed>
       {links.map((link) => {
         return (
           <Link
