@@ -25,6 +25,7 @@ const Dropzone = (props) => {
     disabled,
     dropzoneRef,
     maxSize = DEFAULT_MAX_SIZE,
+    customPreviewSize,
     isSelectFolder = false,
     isShowPreview = true,
     onFinish = () => {}
@@ -149,6 +150,7 @@ const Dropzone = (props) => {
   useImperativeHandle(dropzoneRef, () => {
     return {
       removeFile: (index) => onRemoveFile(index)(),
+      setAcceptedFiles: (defaultFiles) => setFieldValue(name, defaultFiles),
       getAcceptedFiles: () => files
     }
   })
@@ -277,7 +279,9 @@ const Dropzone = (props) => {
               <div
                 className={clx(
                   'relative',
-                  { 'p-2 max-sm:w-1/2 max-lg:w-1/3 lg:w-1/6': !isVideo },
+                  { 'p-2 max-sm:w-1/2': !isVideo },
+                  { 'max-lg:w-1/3 lg:w-1/6': (!isVideo && !customPreviewSize) },
+                  { [customPreviewSize]: (!isVideo && customPreviewSize) },
                   { 'w-full flex justify-evenly bg-black my-4': isVideo }
                 )}
                 key={index}
@@ -285,7 +289,7 @@ const Dropzone = (props) => {
                 {
                   !isVideo && (
                     <img
-                      className='mask mask-square h-full rounded-md'
+                      className='rounded-md object-contain'
                       src={url}
                       alt='upload file'
                     />
@@ -302,7 +306,9 @@ const Dropzone = (props) => {
                 }
                 <button
                   type='button'
-                  className='btn btn-square btn-outline btn-error btn-sm absolute bottom-4 right-4'
+                  className={clx(
+                    'btn btn-square btn-outline btn-error btn-sm absolute bottom-4 right-4'
+                  )}
                   onClick={onRemoveFile(index)}
                   disabled={disabled}
                 >
