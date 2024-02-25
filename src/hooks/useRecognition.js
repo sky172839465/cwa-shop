@@ -18,7 +18,8 @@ const retryAction = async (action) => {
     return recognitionStatus === 'success'
   }
 
-  return retry('recognition failed')(action, checker, 1)
+  const retryTimes = window.IS_MOCK ? 1 : 3
+  return retry('recognition failed')(action, checker, retryTimes)
 }
 
 const getRecognitionState = (status) => {
