@@ -5,7 +5,7 @@ import safeAwait from 'safe-await'
 import * as Yup from 'yup'
 import { GrMultiple } from 'react-icons/gr'
 import {
-  MdAdd, MdWarning, MdChecklist
+  MdAdd, MdWarning, MdChecklist, MdOutlineRefresh
 } from 'react-icons/md'
 import toast from 'react-hot-toast'
 import {
@@ -146,6 +146,13 @@ const Batch = () => {
 
   const onCloseEditModal = () => setEditItem({})
 
+  const onRefreshAllFailedRows = () => {
+    const refreshBtns = document.querySelectorAll('button[data-role="triggerRefresh"]')
+    for (const btn of [...refreshBtns]) {
+      btn.click()
+    }
+  }
+
   return (
     <Formik
       initialValues={{
@@ -183,7 +190,7 @@ const Batch = () => {
               </FormRow>
               {isEmpty(formProps.values[FORM.ROWS]) && (
                 <FormRow>
-                  <div role='alert' className='alert'>
+                  <div role='alert' className='alert grid-flow-col justify-start'>
                     <MdWarning size='1.5em' />
                     <span>No video exist.</span>
                   </div>
@@ -191,13 +198,19 @@ const Batch = () => {
               )}
               {!isEmpty(formProps.values[FORM.ROWS]) && (
                 <FormRow>
-                  <div role='alert' className='alert'>
+                  <div role='alert' className='alert grid-flow-col'>
                     <MdChecklist size='1.5em' />
                     <span>
-                      Selected
-                      {` ${size(formProps.values[FORM.ROWS])} `}
-                      videos
+                      {`Selected ${size(formProps.values[FORM.ROWS])} videos`}
                     </span>
+                    <button
+                      type='button'
+                      className='btn btn-square btn-outline'
+                      disabled={formProps.isValid}
+                      onClick={onRefreshAllFailedRows}
+                    >
+                      <MdOutlineRefresh size='1.5em' />
+                    </button>
                   </div>
                   <Table
                     data={formProps.values[FORM.ROWS]}
@@ -212,7 +225,6 @@ const Batch = () => {
                 <button
                   type='submit'
                   className='btn btn-outline'
-                  // disabled={isMutating}
                   disabled={(
                     isMutating ||
                     isEmpty(formProps.values[FORM.ROWS]) ||

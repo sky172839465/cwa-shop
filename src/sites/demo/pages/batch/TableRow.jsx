@@ -73,6 +73,7 @@ const TableRow = (props) => {
         {state.isError && (
           <button
             type='button'
+            data-role='triggerRefresh'
             className='btn btn-square'
             disabled={isLoading}
             onClick={() => trigger()}
