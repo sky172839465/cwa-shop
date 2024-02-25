@@ -27,8 +27,15 @@ const FORM = {
 }
 
 const validationSchema = Yup.object().shape({
-  [FORM.VIDEOS]: Yup.array().min(1).required('Miss video!')
-}, [])
+  [FORM.VIDEOS]: Yup.array().min(1).required('Miss select video.'),
+  [FORM.ROWS]: Yup.array()
+    .min(1).required('Miss select video.')
+    .of(
+      Yup.object().shape({
+        isUploaded: Yup.boolean().oneOf([true], 'Uploading or upload failed.')
+      })
+    )
+})
 
 const Batch = () => {
   const [editItem, setEditItem] = useState({})
@@ -38,8 +45,8 @@ const Batch = () => {
   // const { trigger: putImage } = useCreate(putImageHost)
 
   // const onSubmit = async (formValues, { setSubmitting }) => {}
-  const onSubmit = async (formValues) => {
-    console.log(formValues)
+  const onSubmit = async (formValues, formProps) => {
+    console.log(formValues, formProps)
   }
 
   const onSelectFilesFinish = (formProps) => (newFiles) => {
@@ -138,9 +145,10 @@ const Batch = () => {
                   type='submit'
                   className='btn btn-outline'
                   // disabled={isMutating}
+                  disabled={!formProps.dirty || !isEmpty(formProps.errors)}
                 >
                   <MdAdd size='1.5em' />
-                  {`${t('newItem')}`}
+                  {t('newItem')}
                 </button>
               </div>
               <FocusError />
