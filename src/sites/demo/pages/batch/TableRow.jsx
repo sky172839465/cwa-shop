@@ -2,7 +2,7 @@ import {
   MdEdit, MdDelete, MdCheckCircle, MdError, MdCloudUpload, MdOutlineRefresh
 } from 'react-icons/md'
 import clx from 'classnames'
-import { toString } from 'lodash-es'
+import { get, toString } from 'lodash-es'
 import useRecognition from '../../../../hooks/useRecognition'
 import { FORM_ITEM } from './constants'
 
@@ -11,12 +11,13 @@ const TableRow = (props) => {
     item, field, index, onRemove, onEdit, onUpdated
   } = props
   const {
-    trigger, isLoading, state, data, error
-  } = useRecognition(item, (newData) => onUpdated(field, {
-    [FORM_ITEM.UPLOAD_FILE]: item,
+    trigger, isLoading, state, error
+  } = useRecognition(item[FORM_ITEM.UPLOAD_FILE], (newData) => onUpdated(field, {
+    ...item,
     [FORM_ITEM.RECOGNITION_DATA]: newData,
     [FORM_ITEM.IS_UPLOADED]: true
   }))
+  const formData = get(item, FORM_ITEM.RECOGNITION_DATA, {})
 
   return (
     <tr>
@@ -30,7 +31,7 @@ const TableRow = (props) => {
           {state.isSuccess && (<MdCheckCircle className='fill-success' size='1.5em' />)}
           {state.isError && (<MdError className='fill-error' size='1.5em' />)}
           {state.isLoading && (<MdCloudUpload size='1.5em' />)}
-          {item.name}
+          {item[FORM_ITEM.UPLOAD_FILE].name}
         </div>
       </td>
       {isLoading && (
@@ -47,13 +48,13 @@ const TableRow = (props) => {
         <>
           <td>
             {!state.isError && (
-              <span>{data.itemSerial}</span>
+              <span>{formData.itemSerial}</span>
             )}
             {state.isError && (
               <span className='text-error'>{toString(error)}</span>
             )}
           </td>
-          <td>{data.fishType}</td>
+          <td>{formData.fishType}</td>
         </>
       )}
       <td className='w-4'>
@@ -62,7 +63,9 @@ const TableRow = (props) => {
             type='button'
             className='btn btn-square'
             disabled={isLoading}
-            onClick={() => onEdit({ index, item, data })}
+            onClick={() => onEdit({
+              index, item: item[FORM_ITEM.UPLOAD_FILE], data: formData, field
+            })}
           >
             <MdEdit size='1.5em' />
           </button>

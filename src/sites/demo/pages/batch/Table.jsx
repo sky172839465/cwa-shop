@@ -1,5 +1,4 @@
 import TableRow from './TableRow'
-import { FORM_ITEM } from './constants'
 
 const Table = (props) => {
   const {
@@ -27,7 +26,7 @@ const Table = (props) => {
           {data.map((item, index) => (
             <TableRow
               field={`${field}.${index}`}
-              item={item[FORM_ITEM.UPLOAD_FILE]}
+              item={item}
               index={index}
               key={index}
               onRemove={onRemove}

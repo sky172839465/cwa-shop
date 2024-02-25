@@ -113,11 +113,17 @@ const Batch = () => {
 
   const onSelectFilesFinish = (formProps) => (newFiles) => {
     const currentRows = get(formProps.values, FORM.ROWS, [])
-    const rows = newFiles.map((newFile, index) => ({
-      [FORM_ITEM.UPLOAD_FILE]: newFile,
-      [FORM_ITEM.RECOGNITION_DATA]: {},
-      [FORM_ITEM.IS_UPLOADED]: get(currentRows, `${index}.${FORM_ITEM.IS_UPLOADED}`, false)
-    }))
+    const rows = newFiles.map((newFile, index) => {
+      const {
+        [FORM_ITEM.RECOGNITION_DATA]: recognitionData = undefined,
+        [FORM_ITEM.IS_UPLOADED]: isUploaded = false
+      } = get(currentRows, index, {})
+      return {
+        [FORM_ITEM.UPLOAD_FILE]: newFile,
+        [FORM_ITEM.RECOGNITION_DATA]: recognitionData,
+        [FORM_ITEM.IS_UPLOADED]: isUploaded
+      }
+    })
     formProps.setFieldValue(FORM.ROWS, rows)
   }
 
@@ -129,9 +135,8 @@ const Batch = () => {
     formProps.setFieldValue(FORM.ROWS, filteredRows)
   }
 
-  const onEdit = (obj) => {
-    console.log(obj)
-    setEditItem(obj)
+  const onEdit = (newEditItem) => {
+    setEditItem(newEditItem)
     modalRef.current.open()
   }
 
@@ -142,16 +147,16 @@ const Batch = () => {
   const onCloseEditModal = () => setEditItem({})
 
   return (
-    <>
-      <Formik
-        initialValues={{
-          [FORM.VIDEOS]: [],
-          [FORM.ROWS]: []
-        }}
-        validationSchema={validationSchema}
-        onSubmit={onSubmit}
-      >
-        {(formProps) => (
+    <Formik
+      initialValues={{
+        [FORM.VIDEOS]: [],
+        [FORM.ROWS]: []
+      }}
+      validationSchema={validationSchema}
+      onSubmit={onSubmit}
+    >
+      {(formProps) => (
+        <>
           <Form>
             <FormLayout>
               <div role='alert' className='alert'>
@@ -221,14 +226,15 @@ const Batch = () => {
               <FocusError />
             </FormLayout>
           </Form>
-        )}
-      </Formik>
-      <EditModal
-        modalRef={modalRef}
-        editItem={editItem}
-        onClose={onCloseEditModal}
-      />
-    </>
+          <EditModal
+            modalRef={modalRef}
+            editItem={editItem}
+            onClose={onCloseEditModal}
+            onUpdated={onUpdated(formProps)}
+          />
+        </>
+      )}
+    </Formik>
   )
 }
 
