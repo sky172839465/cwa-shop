@@ -4,6 +4,7 @@ import {
 import clx from 'classnames'
 import { toString } from 'lodash-es'
 import useRecognition from '../../../../hooks/useRecognition'
+import { FORM_ITEM } from './constants'
 
 const TableRow = (props) => {
   const {
@@ -12,9 +13,9 @@ const TableRow = (props) => {
   const {
     trigger, isLoading, state, data, error
   } = useRecognition(item, (newData) => onUpdated(field, {
-    uploadFile: item,
-    recognitionData: newData,
-    isUploaded: true
+    [FORM_ITEM.UPLOAD_FILE]: item,
+    [FORM_ITEM.RECOGNITION_DATA]: newData,
+    [FORM_ITEM.IS_UPLOADED]: true
   }))
 
   return (

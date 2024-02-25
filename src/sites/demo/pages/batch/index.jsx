@@ -17,14 +17,10 @@ import Dropzone from '../../../../components/Dropzone'
 import ACCEPT from '../../../../components/Dropzone/accept'
 import Table from './Table'
 import EditModal from './EditModal'
+import { FORM, FORM_ITEM } from './constants'
 
 // const putImageHost = getApiHost('VITE_AWS_PUT_IMAGE_HOST')
 // const putImageEndPoint = `${import.meta.env.VITE_AWS_HOST_PREFIX}/putimage`
-
-const FORM = {
-  VIDEOS: 'videos',
-  ROWS: 'rows'
-}
 
 const validationSchema = Yup.object().shape({
   [FORM.VIDEOS]: Yup.array().min(1).required('Miss select video.'),
@@ -32,7 +28,8 @@ const validationSchema = Yup.object().shape({
     .min(1).required('Miss select video.')
     .of(
       Yup.object().shape({
-        isUploaded: Yup.boolean().oneOf([true], 'Uploading or upload failed.')
+        [FORM_ITEM.IS_UPLOADED]: Yup.boolean()
+          .oneOf([true], 'Uploading or upload failed.')
       })
     )
 })
@@ -46,14 +43,15 @@ const Batch = () => {
 
   // const onSubmit = async (formValues, { setSubmitting }) => {}
   const onSubmit = async (formValues, formProps) => {
+    // const rows = get(formValues, FORM.ROWS, [])
     console.log(formValues, formProps)
   }
 
   const onSelectFilesFinish = (formProps) => (newFiles) => {
     const rows = newFiles.map((newFile) => ({
-      uploadFile: newFile,
-      recognitionData: {},
-      isUploaded: false
+      [FORM_ITEM.UPLOAD_FILE]: newFile,
+      [FORM_ITEM.RECOGNITION_DATA]: {},
+      [FORM_ITEM.IS_UPLOADED]: false
     }))
     formProps.setFieldValue(FORM.ROWS, rows)
   }
