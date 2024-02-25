@@ -42,6 +42,7 @@ const getRecognitionState = (status) => {
 
 const useRecognition = (file, onSuccess) => {
   const isInit = useRef(false)
+  const isVideoUploaded = useRef(false)
   const [isLoading, setIsLoading] = useState(true)
   const [recognitionError, setRecognitionError] = useState(null)
   const [status, setStatus] = useState('')
@@ -57,16 +58,20 @@ const useRecognition = (file, onSuccess) => {
   const recognition = async () => {
     setIsLoading(true)
     setStatus('loading')
-    const [uploadVideoError] = await safeAwait(
-      uploadVideo({ url: `/v1/ithomebucket/${fileName}`, [fileName]: url })
-    )
-    if (uploadVideoError) {
-      setIsLoading(false)
-      setRecognitionError(uploadVideoError)
-      setStatus('fail')
-      return
+    // prevent reupload video
+    if (!isVideoUploaded.current) {
+      const [uploadVideoError] = await safeAwait(
+        uploadVideo({ url: `/v1/ithomebucket/${fileName}`, File: url })
+      )
+      if (uploadVideoError) {
+        setIsLoading(false)
+        setRecognitionError(uploadVideoError)
+        setStatus('fail')
+        return
+      }
     }
 
+    isVideoUploaded.current = true
     const params = { file: fileName }
     const getRecognitionUrl = `${awsHostPrefix}/getRecognition?${qs.stringify(params)}`
     const [videoRecognitionError, result] = await safeAwait(
