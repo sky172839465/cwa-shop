@@ -1,15 +1,19 @@
 import { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Formik, Form } from 'formik'
+import safeAwait from 'safe-await'
 import * as Yup from 'yup'
 import { GrMultiple } from 'react-icons/gr'
 import {
   MdAdd, MdWarning, MdChecklist
 } from 'react-icons/md'
-import { get, isEmpty, size } from 'lodash-es'
+import toast from 'react-hot-toast'
+import {
+  filter, get, isEmpty, isUndefined, map, size
+} from 'lodash-es'
 import wait from '../../../../utils/wait'
-// import getApiHost from '../../../../utils/getApiHost'
-// import useCreate from '../../../../hooks/useCreate'
+import getApiHost from '../../../../utils/getApiHost'
+import useCreate from '../../../../hooks/useCreate'
 import FormLayout from '../../../../components/Form/Layout'
 import FormRow from '../../../../components/Form/FormRow'
 import FocusError from '../../../../components/Form/FocusError'
@@ -19,17 +23,40 @@ import Table from './Table'
 import EditModal from './EditModal'
 import { FORM, FORM_ITEM } from './constants'
 
-// const putImageHost = getApiHost('VITE_AWS_PUT_IMAGE_HOST')
-// const putImageEndPoint = `${import.meta.env.VITE_AWS_HOST_PREFIX}/putimage`
+const putImageHost = getApiHost('VITE_AWS_PUT_IMAGE_HOST')
+const putImageEndPoint = `${import.meta.env.VITE_AWS_HOST_PREFIX}/putimage`
+
+const ACTION = {
+  NEW: 'new',
+  UPDATE: 'update'
+}
+
+const getParamsListFromRecognitionData = (row = {}) => {
+  const { name } = get(row, FORM_ITEM.UPLOAD_FILE, {})
+  const {
+    fishType,
+    itemSerial,
+    itemImages = [],
+    itemVideos = []
+  } = get(row, FORM_ITEM.RECOGNITION_DATA, {})
+  const paramsList = map([...itemVideos, ...itemImages], (fileName, index) => {
+    return {
+      fishType,
+      itemSerial,
+      fileName,
+      action: index === 0 ? ACTION.NEW : ACTION.UPDATE
+    }
+  })
+  return { name, paramsList }
+}
 
 const validationSchema = Yup.object().shape({
-  [FORM.VIDEOS]: Yup.array().min(1).required('Miss select video.'),
   [FORM.ROWS]: Yup.array()
     .min(1).required('Miss select video.')
     .of(
       Yup.object().shape({
         [FORM_ITEM.IS_UPLOADED]: Yup.boolean()
-          .oneOf([true], 'Uploading or upload failed.')
+          .isTrue().required('Uploading or upload failed.')
       })
     )
 })
@@ -39,19 +66,57 @@ const Batch = () => {
   const dropzoneRef = useRef()
   const modalRef = useRef()
   const { t } = useTranslation()
-  // const { trigger: putImage } = useCreate(putImageHost)
+  const { trigger: putImage, isMutating } = useCreate(putImageHost)
 
-  // const onSubmit = async (formValues, { setSubmitting }) => {}
   const onSubmit = async (formValues, formProps) => {
-    // const rows = get(formValues, FORM.ROWS, [])
-    console.log(formValues, formProps)
+    const toastId = toast.loading('Creating...')
+    const rows = get(formValues, FORM.ROWS, [])
+    const batchParamsList = map(rows, getParamsListFromRecognitionData)
+    const [error, resultList] = await safeAwait(
+      Promise.all(map(batchParamsList, async ({ paramsList = [] }) => {
+        const [newParams, ...updateParamsList] = paramsList
+        const [newError] = await safeAwait(putImage({ url: putImageEndPoint, ...newParams }))
+        if (newError) {
+          console.log(newError)
+          return { isSuccess: false }
+        }
+
+        const [updateError] = await safeAwait(
+          Promise.all(updateParamsList.map((param) => {
+            return putImage({ url: putImageEndPoint, ...param })
+          }))
+        )
+        if (updateError) {
+          console.log(updateError)
+          return { isSuccess: false }
+        }
+
+        return { isSuccess: true }
+      }))
+    )
+
+    if (isUndefined(error)) {
+      toast.success('Finish!', { id: toastId })
+      formProps.resetForm()
+      return
+    }
+
+    const newRows = filter(rows, (row, index) => {
+      const { isSuccess } = get(resultList, index, {})
+      return !isSuccess
+    })
+    toast('Some records not success.', { id: toastId })
+    formProps.resetForm({
+      values: { [FORM.ROWS]: newRows }
+    })
   }
 
   const onSelectFilesFinish = (formProps) => (newFiles) => {
-    const rows = newFiles.map((newFile) => ({
+    const currentRows = get(formProps.values, FORM.ROWS, [])
+    const rows = newFiles.map((newFile, index) => ({
       [FORM_ITEM.UPLOAD_FILE]: newFile,
       [FORM_ITEM.RECOGNITION_DATA]: {},
-      [FORM_ITEM.IS_UPLOADED]: false
+      [FORM_ITEM.IS_UPLOADED]: get(currentRows, `${index}.${FORM_ITEM.IS_UPLOADED}`, false)
     }))
     formProps.setFieldValue(FORM.ROWS, rows)
   }
@@ -143,7 +208,11 @@ const Batch = () => {
                   type='submit'
                   className='btn btn-outline'
                   // disabled={isMutating}
-                  disabled={!formProps.dirty || !isEmpty(formProps.errors)}
+                  disabled={(
+                    isMutating ||
+                    isEmpty(formProps.values[FORM.ROWS]) ||
+                    !isEmpty(formProps.errors)
+                  )}
                 >
                   <MdAdd size='1.5em' />
                   {t('newItem')}
