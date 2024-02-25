@@ -5,37 +5,17 @@ import clx from 'classnames'
 import { toString } from 'lodash-es'
 import useRecognition from '../../../../hooks/useRecognition'
 
-const getRecognitionState = (status) => {
-  let isLoading = false
-  let isSuccess = false
-  let isError = false
-  if (status === 'loading') {
-    isLoading = true
-  }
-
-  if (status === 'success') {
-    isSuccess = true
-  }
-
-  if (status === 'fail') {
-    isError = true
-  }
-
-  return { isLoading, isSuccess, isError }
-}
-
 const TableRow = (props) => {
   const {
     item, field, index, onRemove, onEdit, onUpdated
   } = props
   const {
-    trigger, isLoading, status, data, error
+    trigger, isLoading, state, data, error
   } = useRecognition(item, (newData) => onUpdated(field, {
     uploadFile: item,
     recognitionData: newData,
     isUploaded: true
   }))
-  const state = getRecognitionState(status)
 
   return (
     <tr>

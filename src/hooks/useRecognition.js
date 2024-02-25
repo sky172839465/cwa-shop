@@ -21,6 +21,25 @@ const retryAction = async (action) => {
   return retry('recognition failed')(action, checker, 1)
 }
 
+const getRecognitionState = (status) => {
+  let isLoading = false
+  let isSuccess = false
+  let isError = false
+  if (status === 'loading') {
+    isLoading = true
+  }
+
+  if (status === 'success') {
+    isSuccess = true
+  }
+
+  if (status === 'fail') {
+    isError = true
+  }
+
+  return { isLoading, isSuccess, isError }
+}
+
 const useRecognition = (file, onSuccess) => {
   const isInit = useRef(false)
   const [isLoading, setIsLoading] = useState(true)
@@ -81,7 +100,7 @@ const useRecognition = (file, onSuccess) => {
     trigger: recognition,
     isLoading,
     error: recognitionError,
-    status,
+    state: getRecognitionState(status),
     data
   }
 }
