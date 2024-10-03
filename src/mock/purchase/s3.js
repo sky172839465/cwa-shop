@@ -35,6 +35,12 @@ export default [
     response: () => ({})
   },
   {
+    url: `${MOCK_SIGNED_URL}?part=1`,
+    method: 'put',
+    timeout: 100,
+    response: () => ({})
+  },
+  {
     url: `${awsHostPrefix}/uploadfinalize`,
     method: 'post',
     timeout: 100,
