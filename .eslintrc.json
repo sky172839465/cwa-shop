@@ -10,8 +10,20 @@
     },
     "tailwindcss": {
       "whitelist": ["screen-fill"]
-    }
+    },
+    "import/resolver": {
+      "node": {
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".mjs",
+          ".cjs"
+        ]
+      }
+    },
+    "import/core-modules": ["@tailwindcss/vite"]
   },
+  
   "plugins": ["react-refresh"],
   "rules": {
     "react-refresh/only-export-components": [

@@ -1,6 +1,7 @@
 import { resolve } from 'path'
 import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react-swc'
+import tailwindcss from '@tailwindcss/vite'
 import { viteMockServe } from 'vite-plugin-mock'
 import { analyzer } from 'vite-bundle-analyzer'
 import { sync } from 'glob'
@@ -77,6 +78,7 @@ export default ({ mode }) => {
     },
     root: `${entriesDir}/${isDefaultEntry ? '' : `/${ENTRY}`}`,
     plugins: [
+      tailwindcss(),
       react(),
       viteMockServe({
         mockPath: './src/mock',
