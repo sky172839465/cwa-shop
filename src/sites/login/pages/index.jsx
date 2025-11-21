@@ -27,13 +27,13 @@ const Login = () => {
                   <label className='label'>
                     <span className='label-text'>Token Type</span>
                   </label>
-                  <Field name={FORM.TOKEN_TYPE} className='input input-bordered' required />
+                  <Field name={FORM.TOKEN_TYPE} className='input' required />
                 </div>
                 <div className='form-control'>
                   <label className='label'>
                     <span className='label-text'>Access Token</span>
                   </label>
-                  <Field name={FORM.ACCESS_TOKEN} className='input input-bordered' required />
+                  <Field name={FORM.ACCESS_TOKEN} className='input' required />
                 </div>
                 <div className='form-control mt-6'>
                   <a

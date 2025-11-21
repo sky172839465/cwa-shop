@@ -219,7 +219,7 @@ const Dropzone = (props) => {
           { 'border-gray-400': isDragActive }
         )}
         >
-          <span className='flex items-center space-x-2'>
+          <span className='flex items-center gap-2'>
             <MdOutlineCloudUpload
               className='text-gray-600 max-sm:size-16 sm:size-8'
             />

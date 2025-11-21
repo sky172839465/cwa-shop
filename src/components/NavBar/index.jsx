@@ -12,17 +12,16 @@ const NavBar = (props) => {
   return (
     <div
       className={clx(
-        'navbar bg-base-300 w-full top-0 z-10',
-        'sticky',
+        'navbar sticky bg-base-100 shadow-sm z-10 flex justify-between items-center',
         { fixed }
       )}
     >
-      <div className='flex-1'>
+      <div className=''>
         <Logo appBaseName={appBaseName}>
           {title}
         </Logo>
       </div>
-      <div className='flex flex-1 justify-end'>
+      <div className='flex justify-end'>
         <div className='flex items-stretch'>
           {actions}
         </div>

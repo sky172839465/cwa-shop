@@ -71,7 +71,7 @@ const SearchMenu = (props) => {
     <>
       <label
         className={clx(
-          'input input-sm input-bordered flex items-center outline-hidden!',
+          'input input-sm  flex items-center outline-hidden!',
           { 'rounded-b-none border-b-transparent!': isFilterMenuOpen }
         )}
       >

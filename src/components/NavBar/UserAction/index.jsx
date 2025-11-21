@@ -24,10 +24,9 @@ const UserAction = (props) => {
         className='tooltip tooltip-bottom'
         data-tip={`v${window.APP_VERSION}`}
       >
-        <span className='max-sm:hidden'>
+        <span>
           {fixed ? <FaUserCircle size='1.5em' /> : <User />}
         </span>
-        <FaUserCircle className='md:hidden' size='1.5em' />
       </div>
     </div>
   )

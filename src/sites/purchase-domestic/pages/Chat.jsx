@@ -344,7 +344,7 @@ const Chat = () => {
               <Field
                 name={FORM.QUERY}
                 placeholder='請輸入對話以查詢'
-                className='input input-bordered flex-1 leading-4'
+                className='input flex-1 leading-4'
                 // disabled={isLoading || isMutating}
                 autoComplete='off'
               />

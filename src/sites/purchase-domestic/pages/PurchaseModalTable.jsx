@@ -63,7 +63,7 @@ const PurchaseModalTable = (props) => {
                   type='text'
                   inputMode='numeric'
                   className={clx(
-                    'input input-bordered w-full lg:max-w-xs',
+                    'input w-full lg:max-w-xs',
                     { 'text-black!': !editable }
                   )}
                   min={min_purchase_quantity}
@@ -80,7 +80,7 @@ const PurchaseModalTable = (props) => {
               <Field
                 as='textarea'
                 name={FORM_ITEM.REQUEST}
-                className='textarea textarea-bordered w-full resize-none'
+                className='textarea w-full resize-none'
                 disabled={!editable}
               />
             </td>

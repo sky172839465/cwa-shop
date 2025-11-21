@@ -162,7 +162,7 @@ const Page = () => {
                   <Field
                     as='select'
                     name={FORM.REPORT_TYPE}
-                    className='select select-bordered w-full lg:max-w-xs'
+                    className='select w-full lg:max-w-xs'
                     autoComplete='off'
                     disabled={isLoading}
                   >
