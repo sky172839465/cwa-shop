@@ -71,8 +71,8 @@ const SearchMenu = (props) => {
     <>
       <label
         className={clx(
-          'input input-sm input-bordered flex items-center !outline-none',
-          { 'rounded-b-none !border-b-transparent': isFilterMenuOpen }
+          'input input-sm input-bordered flex items-center outline-hidden!',
+          { 'rounded-b-none border-b-transparent!': isFilterMenuOpen }
         )}
       >
         <Link
@@ -95,13 +95,13 @@ const SearchMenu = (props) => {
         {phaseType === PHASE_TYPE.AI && (
           <IoSparklesSharp
             size='1.5em'
-            className='!fill-yellow-300'
+            className='fill-yellow-300!'
           />
         )}
         {phaseType === PHASE_TYPE.NORMAL && (
           <MdFilterAlt
             size='1.5em'
-            className='!fill-indigo-500'
+            className='fill-indigo-500!'
           />
         )}
         {phaseType === null && (
@@ -140,7 +140,7 @@ const SearchMenu = (props) => {
               >
                 <IoSparklesSharp
                   size='1.5em'
-                  className='!fill-yellow-300'
+                  className='fill-yellow-300!'
                 />
                 AI 搜尋
                 {isPhaseEmpty ? '' : ` "${currentPhase}"`}
@@ -158,7 +158,7 @@ const SearchMenu = (props) => {
               >
                 <MdFilterAlt
                   size='1.5em'
-                  className='!fill-indigo-500'
+                  className='fill-indigo-500!'
                 />
                 一般過濾
                 {isPhaseEmpty ? '' : ` "${currentPhase}"`}

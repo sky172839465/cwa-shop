@@ -31,7 +31,7 @@ const Card = (props) => {
             src={imageURL}
             className='mask'
             alt={itemSerial}
-            loaderClassName='w-full h-[10rem]'
+            loaderClassName='w-full h-40'
           />
         </figure>
         <div className='card-body'>

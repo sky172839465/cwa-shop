@@ -64,7 +64,7 @@ const PurchaseModalTable = (props) => {
                   inputMode='numeric'
                   className={clx(
                     'input input-bordered w-full lg:max-w-xs',
-                    { '!text-black': !editable }
+                    { 'text-black!': !editable }
                   )}
                   min={min_purchase_quantity}
                   placeholder={inventory === -1 ? '無上限' : ''}

@@ -231,7 +231,7 @@ const Chat = () => {
         <div
           ref={messagesRef}
           className={clx('flex-1 space-y-4 overflow-y-auto p-4', {
-            'skeleton rounded-none [&_*]:invisible': isLoading
+            'skeleton rounded-none **:invisible': isLoading
           })}
         >
           {data.map((chat, index) => {
@@ -255,7 +255,7 @@ const Chat = () => {
                   </div>
                   <div
                     className={clx('chat-footer my-2 hidden', {
-                      '!block': isError && isLastIndex
+                      'block!': isError && isLastIndex
                     })}
                   >
                     <button
@@ -297,7 +297,7 @@ const Chat = () => {
                           return (
                             <Link
                               key={uuid}
-                              className='flex flex-col gap-2 rounded-sm bg-white p-2'
+                              className='flex flex-col gap-2 rounded-xs bg-white p-2'
                               to={`?uuid=${uuid}`}
                               onClick={onClickUUID}
                               viewTransition

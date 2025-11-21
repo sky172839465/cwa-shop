@@ -31,7 +31,7 @@ const getTableLinkCols = (rowData, isSelected) => {
       <td>
         <a
           className={clx(
-            'btn btn-sm !w-20',
+            'btn btn-sm w-20!',
             {
               'btn-disabled pointer-events-none': isImageEmpty,
               'btn-outline btn-primary': isSelected
@@ -44,7 +44,7 @@ const getTableLinkCols = (rowData, isSelected) => {
         >
           <FaLink
             className={clx({
-              '!fill-indigo-500': !isImageEmpty
+              'fill-indigo-500!': !isImageEmpty
             })}
           />
           Link
@@ -53,7 +53,7 @@ const getTableLinkCols = (rowData, isSelected) => {
       <td>
         <a
           className={clx(
-            'btn btn-sm !w-20',
+            'btn btn-sm w-20!',
             {
               'btn-disabled pointer-events-none': isVideoEmpty,
               'btn-outline btn-primary': isSelected
@@ -66,7 +66,7 @@ const getTableLinkCols = (rowData, isSelected) => {
         >
           <FaLink
             className={clx({
-              '!fill-indigo-500': !isVideoEmpty
+              'fill-indigo-500!': !isVideoEmpty
             })}
           />
           Link
@@ -177,10 +177,10 @@ const PurchaseTable = (props) => {
                   )}
                 >
                   <span className={clx('swap-on', { hidden: !isSelected })}>
-                    <MdOutlineDelete size='1.5em' className='!fill-red-500' />
+                    <MdOutlineDelete size='1.5em' className='fill-red-500!' />
                   </span>
                   <span className={clx('swap-off', { hidden: isSelected })}>
-                    <TiShoppingCart size='1.5em' className='!fill-indigo-500' />
+                    <TiShoppingCart size='1.5em' className='fill-indigo-500!' />
                   </span>
                   {index + 1}
                 </label>

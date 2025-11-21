@@ -126,7 +126,7 @@ const ProductModal = (props) => {
         >
           {!isEmpty(itemVideos) && (
             <div className='max-w-full max-sm:h-[80vh] sm:max-h-full'>
-              <div className='m-auto max-w-screen-lg'>
+              <div className='m-auto max-w-(--breakpoint-lg)'>
                 <Video
                   options={getOptions(itemVideos)}
                   onReady={onPlayerReady}
@@ -146,7 +146,7 @@ const ProductModal = (props) => {
                     key={imgUrl}
                     className='m-auto max-h-screen object-scale-down'
                     alt='Carousel component'
-                    loaderClassName='translate-x-[-100%] z-0 w-[100vw] h-[80vh]'
+                    loaderClassName='-translate-x-full z-0 w-screen h-[80vh]'
                   />
                 </div>
               </div>

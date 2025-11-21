@@ -108,7 +108,7 @@ const Operation = () => {
           systemType={SYSTEM_TYPE.EXTERNAL}
         />
       </div>
-      <div className='divider !my-0 w-full' />
+      <div className='divider my-0! w-full' />
       <a
         href='https://quotation4test.uniheart.com.tw/'
         className='btn btn-primary w-full'

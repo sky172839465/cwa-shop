@@ -174,7 +174,7 @@ const Page = () => {
           <thead>
             <tr>
               <th />
-              <th className='z-[1]'>{`${t('pictures')}`}</th>
+              <th className='z-1'>{`${t('pictures')}`}</th>
               <th>{`${t('fishType')}`}</th>
               <th>{`${t('tankNo')}`}</th>
               <th>{`${t('itemPrice')}`}</th>

@@ -56,6 +56,7 @@
     "safe-await": "^2.0.0",
     "slick-carousel": "^1.8.1",
     "swr": "^2.3.6",
+    "tailwindcss": "^4.1.17",
     "video.js": "^8.6.1",
     "yup": "^1.3.2"
   },
@@ -73,7 +74,6 @@
     "eslint-plugin-react": "^7.34.2",
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-react-refresh": "^0.4.7",
-    "eslint-plugin-tailwindcss": "^3.17.3",
     "glob": "^11.1.0",
     "husky": "^8.0.3",
     "lint-staged": "^15.2.7",
@@ -82,7 +82,6 @@
     "prettier-plugin-sh": "^0.14.0",
     "stylelint": "^16.6.1",
     "stylelint-config-standard": "^36.0.0",
-    "tailwindcss-content-visibility": "^1.0.0",
     "vite": "^6.4.1",
     "vite-bundle-analyzer": "^0.8.1",
     "vite-plugin-mock": "^3.0.2"
@@ -90,12 +89,6 @@
   "lint-staged": {
     "**/*.{js,jsx}": [
       "eslint --fix"
-    ],
-    "**/*.css": [
-      "stylelint --fix"
-    ],
-    "**/!(package.lock).{json,md,yml,sh}": [
-      "prettier --write"
     ]
   }
 }

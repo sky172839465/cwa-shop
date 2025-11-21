@@ -204,9 +204,9 @@ const PurchaseDomestic = () => {
         </div>
         <p className='flex gap-2 text-sm'>
           點擊
-          <TiShoppingCart size='1.5em' className='!fill-indigo-500' />
+          <TiShoppingCart size='1.5em' className='fill-indigo-500!' />
           加入購物車
-          <MdOutlineDelete size='1.5em' className='!fill-red-500' />
+          <MdOutlineDelete size='1.5em' className='fill-red-500!' />
           從購物車移除
         </p>
         <div className='overflow-x-auto overscroll-x-none max-sm:h-[calc(100dvh-14.5rem)] sm:h-[calc(100dvh-11.5rem)]'>

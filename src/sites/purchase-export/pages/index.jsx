@@ -81,9 +81,9 @@ const PurchaseExport = () => {
         </div>
         <p className='flex gap-2 text-sm'>
           Click
-          <TiShoppingCart size='1.5em' className='!fill-indigo-500' />
+          <TiShoppingCart size='1.5em' className='fill-indigo-500!' />
           add to cart
-          <MdOutlineDelete size='1.5em' className='!fill-red-500' />
+          <MdOutlineDelete size='1.5em' className='fill-red-500!' />
           remove from cart
         </p>
         <div className='overflow-x-auto max-sm:h-[calc(100dvh-14.5rem)] sm:h-[calc(100dvh-11.5rem)]'>

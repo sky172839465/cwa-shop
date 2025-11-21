@@ -101,7 +101,7 @@ const ViewFileModal = (props) => {
               className='max-w-full max-sm:h-[80vh] sm:max-h-full'
               key={`video-${index}`}
             >
-              <div className='m-auto max-w-screen-lg'>
+              <div className='m-auto max-w-(--breakpoint-lg)'>
                 <Video
                   options={getOptions([{ productVideo: video }])}
                   onReady={onPlayerReady}
@@ -122,7 +122,7 @@ const ViewFileModal = (props) => {
                   key={image}
                   className='m-auto max-h-screen object-scale-down'
                   alt='Carousel component'
-                  loaderClassName='translate-x-[-100%] z-0 w-[100vw] h-[80vh]'
+                  loaderClassName='-translate-x-full z-0 w-screen h-[80vh]'
                 />
               </div>
               <a

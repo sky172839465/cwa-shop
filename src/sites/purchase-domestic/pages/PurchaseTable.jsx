@@ -44,7 +44,7 @@ const getTableLinkCols = (rowData, isSelected, onClick) => {
       <button
         type='button'
         className={clx(
-          'btn btn-sm !w-20',
+          'btn btn-sm w-20!',
           {
             'btn-disabled pointer-events-none': !isAssetExist,
             'btn-outline btn-primary': isSelected
@@ -54,7 +54,7 @@ const getTableLinkCols = (rowData, isSelected, onClick) => {
       >
         <FaEye
           className={clx({
-            '!fill-indigo-500': isAssetExist
+            'fill-indigo-500!': isAssetExist
           })}
         />
         檢視
@@ -109,10 +109,10 @@ const TableRow = (props) => {
           )}
         >
           <span className={clx('swap-on', { hidden: !isSelected })}>
-            <MdOutlineDelete size='1.5em' className='!fill-red-500' />
+            <MdOutlineDelete size='1.5em' className='fill-red-500!' />
           </span>
           <span className={clx('swap-off', { hidden: isSelected })}>
-            <TiShoppingCart size='1.5em' className='!fill-indigo-500' />
+            <TiShoppingCart size='1.5em' className='fill-indigo-500!' />
           </span>
           {index + 1}
         </label>
@@ -225,7 +225,7 @@ const PurchaseTable = (props) => {
         className='table table-pin-rows table-pin-cols'
       >
         <thead>
-          <tr className='z-[1] max-sm:-top-1'>
+          <tr className='z-1 max-sm:-top-1'>
             <th>項次</th>
             <td>品名</td>
             <td>尺寸</td>
