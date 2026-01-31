@@ -352,7 +352,7 @@ const PurchaseTable = (props) => {
             </td>
             <td data-desktop>建議零售價</td>
             <td data-desktop>在庫量</td>
-            <td data-desktop>起購量</td>
+            <td data-desktop>最低訂購量(隻/組)</td>
             <td data-desktop>說明</td>
             <td data-desktop>特殊要求</td>
             <td data-desktop>購買數量</td>

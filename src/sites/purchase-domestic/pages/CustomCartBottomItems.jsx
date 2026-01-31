@@ -12,6 +12,7 @@ const CustomCartBottomItems = (props) => {
       discounts = []
     } = {}
   } = props
+  const actualPayment = total_price - total_discount_amt
   const customItems = [
     <details open>
       <summary>
@@ -31,7 +32,8 @@ const CustomCartBottomItems = (props) => {
       </ul>
     </details>,
     `${t('totalCount')}: ${new Intl.NumberFormat('en-US').format(total_quantity)}`,
-    `${t('totalPrice')}: ${`${new Intl.NumberFormat('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 }).format(total_price)} NTD`}`
+    `${t('totalPrice')}: ${`${new Intl.NumberFormat('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 }).format(total_price)} NTD`}`,
+    `${t('actualPayment')}: ${`${new Intl.NumberFormat('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 }).format(actualPayment)} NTD`}`
   ]
   return (
     <CartBottomItems

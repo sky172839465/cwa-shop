@@ -8,7 +8,7 @@ const SiteLayout = (props) => {
     <Root>
       <NavBar
         appBaseName={appBaseName}
-        title='Quotation Staff'
+        title='報價單系統員工操作界面'
       />
       <div className='w-full max-w-full'>
         <Outlet />

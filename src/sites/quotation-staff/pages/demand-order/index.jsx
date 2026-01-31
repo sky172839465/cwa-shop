@@ -216,7 +216,7 @@ const Page = () => {
               </div>
               <div className='alert flex w-full flex-col items-start gap-4 md:w-1/3'>
                 <div>
-                  API response
+                  系統響應
                 </div>
                 <div>
                   <pre className='whitespace-break-spaces break-all text-left'>

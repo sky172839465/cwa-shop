@@ -64,11 +64,11 @@ const PurchaseModalTable = (props) => {
             <td>{inventory}</td>
           </tr>
           <tr>
-            <td>起購量</td>
+            <td>最低訂購量(隻/組)</td>
             <td>{min_purchase_quantity}</td>
           </tr>
           <tr>
-            <td>購買對數</td>
+            <td>按組購買</td>
             <td>{`${group} 對`}</td>
           </tr>
           <tr>

@@ -19,7 +19,7 @@ function quantityRange(count) {
   return count >= min
     ? true
     : this.createError({
-      message: `起購量為 ${min}`
+      message: `最低訂購量為 ${min}`
     })
 }
 

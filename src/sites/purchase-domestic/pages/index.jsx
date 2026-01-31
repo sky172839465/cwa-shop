@@ -110,14 +110,15 @@ const PurchaseDomestic = () => {
       return
     }
 
+    const { fish_code } = originData
+    const isSelected = fish_code in selectProductMap
     const rowData = {
       [FORM_ITEM.MIN_PURCHASE_QUANTITY]: get(originData, FORM_ITEM.MIN_PURCHASE_QUANTITY, 0),
       [FORM_ITEM.REQUEST]: get(originData, FORM_ITEM.REQUEST, ''),
+      [FORM_ITEM.QUANTITY]: isSelected ? get(originData, FORM_ITEM.QUANTITY, 0) : 0,
       ...originData
     }
-    const { fish_code } = rowData
     setClickRowData(rowData)
-    const isSelected = fish_code in selectProductMap
     if (isSelected) {
       modifyPurchaseModalRef.current.open()
       return

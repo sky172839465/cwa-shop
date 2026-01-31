@@ -149,6 +149,7 @@ const Quotation = () => {
     if (createError) {
       toast.error(`Error! ${createError.message}`, { id: toastId })
       setSubmitting(false)
+      return
     }
 
     toast.success('Finish!', { id: toastId })

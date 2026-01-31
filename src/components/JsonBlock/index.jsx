@@ -9,7 +9,7 @@ const JsonBlock = ({ className }) => {
       className={clx('alert flex w-full flex-col items-start gap-4', { [className]: className })}
     >
       <div>
-        API response
+        系統響應
       </div>
       <div>
         <pre className='whitespace-break-spaces break-all text-left'>

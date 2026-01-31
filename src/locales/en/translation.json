@@ -8,6 +8,7 @@
   "cartInfo": "Cart is empty",
   "totalCount": "Total piece",
   "totalPrice": "Total amount",
+  "actualPayment": "Actual Payment Amount",
   "confirmOrder": "CONFIRM ORDER",
   "fishType": "Common Name",
   "tankNo": "Number",
