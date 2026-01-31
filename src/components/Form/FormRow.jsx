@@ -1,5 +1,17 @@
 import clx from 'classnames'
 
+/**
+ * FormRow component wraps form inputs with a label and error display
+ * @param {object} props
+ * @param {string} [props.inputId] - Optional id to link label to input via htmlFor.
+ *                                    When provided, ensure the child input has
+ *                                    matching id attribute.
+ * @param {string} props.label - Label text
+ * @param {boolean} [props.required] - Shows required asterisk
+ * @param {string} [props.error] - Error message to display
+ * @param {string} [props.counter] - Counter text to display
+ * @param {string} [props.className] - Additional CSS classes
+ */
 const FormRow = (props) => {
   const {
     children, label, required, error, counter, className, inputId
