@@ -12,7 +12,7 @@
     "build:spa": "vite build && npm run build:404",
     "build:gh": "BASENAME=1 MOCK=1 MOCK_AWS_API=1 npm run build:spa",
     "build:cf": "MOCK=1 MOCK_AWS_API=1 npm run build:spa",
-    "build:404": "cp dist/index.html dist/404.html",
+    "build:404": "cp dist/index.html dist/404.html && cp public/_redirects dist/_redirects && ls -l dist",
     "lint": "eslint . --ext .js,.jsx",
     "lint:fix": "npm run lint -- --fix",
     "preview": "npm run build:spa && vite preview",
