@@ -1,6 +1,7 @@
 import { resolve } from 'path'
 import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react-swc'
+import { viteMockServe } from 'vite-plugin-mock'
 import { analyzer } from 'vite-bundle-analyzer'
 import { sync } from 'glob'
 import {
@@ -77,6 +78,10 @@ export default ({ mode }) => {
     root: `${entriesDir}/${isDefaultEntry ? '' : `/${ENTRY}`}`,
     plugins: [
       react(),
+      viteMockServe({
+        mockPath: './src/mock',
+        localEnabled: isMock
+      }),
       ...(isAnalyzer ? [analyzer()] : [])
     ],
     build: {
