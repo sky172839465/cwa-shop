@@ -1,7 +1,6 @@
-const typography = require('@tailwindcss/typography')
-const aspectRatio = require('@tailwindcss/aspect-ratio')
-const contentVisibility = require('tailwindcss-content-visibility')
-const daisyui = require('daisyui')
+import typography from '@tailwindcss/typography'
+import contentVisibility from 'tailwindcss-content-visibility'
+import daisyui from 'daisyui'
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -9,9 +8,6 @@ export default {
     './src/index.html',
     './src/**/*.{js,ts,jsx,tsx}'
   ],
-  corePlugins: {
-    aspectRatio: false
-  },
   theme: {
     extend: {
       height: {
@@ -21,7 +17,6 @@ export default {
   },
   plugins: [
     typography,
-    aspectRatio,
     contentVisibility,
     daisyui
   ],
