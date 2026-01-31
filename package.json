@@ -78,7 +78,6 @@
     "glob": "^11.1.0",
     "husky": "^8.0.3",
     "lint-staged": "^15.2.7",
-    "mockjs": "^1.1.0",
     "postcss": "^8.4.38",
     "prettier": "^3.3.2",
     "prettier-plugin-sh": "^0.14.0",
@@ -87,8 +86,7 @@
     "tailwindcss": "^4.1.18",
     "tailwindcss-content-visibility": "^1.0.0",
     "vite": "^6.4.1",
-    "vite-bundle-analyzer": "^0.8.1",
-    "vite-plugin-mock": "^3.0.2"
+    "vite-bundle-analyzer": "^0.8.1"
   },
   "lint-staged": {
     "**/*.{js,jsx}": [
