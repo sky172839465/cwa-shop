@@ -80,13 +80,13 @@ const PurchaseModalTable = (props) => {
             <td>購買數量</td>
             <td>
               <FieldError name={FORM_ITEM.QUANTITY}>
-                <div className='join'>
+                <div className='join w-full'>
                   <Field
                     name={FORM_ITEM.QUANTITY}
                     type='text'
                     inputMode='numeric'
                     className={clx(
-                      'input input-bordered join-item w-full lg:max-w-xs',
+                      'input input-bordered join-item min-w-0 flex-1',
                       { '!text-black': !editable }
                     )}
                     min={min_purchase_quantity}
@@ -95,7 +95,7 @@ const PurchaseModalTable = (props) => {
                     autoComplete='off'
                   />
                   <input
-                    className='input input-bordered join-item min-w-[130px]'
+                    className='input join-item input-bordered w-auto flex-none whitespace-nowrap px-3'
                     value={`(組) 共 ${quantity * group} 隻`}
                     readOnly
                   />
