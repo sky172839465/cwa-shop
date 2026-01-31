@@ -21,11 +21,21 @@ const PurchaseModalTable = (props) => {
     group,
     note,
     video_links: videos = [],
-    image_links: images = []
+    image_links: images = [],
+    quantity = 0
   } = values
   const isOverviewBtnDisabled = (
     isEmpty(videos) && isEmpty(images)
   )
+
+  // Calculate dynamic description for purchase quantity
+  const getPurchaseDescription = () => {
+    if (!quantity || !group || group === 0) {
+      return ''
+    }
+    const totalFish = quantity * group
+    return ` (${quantity} 組 / 總共 ${totalFish} 隻)`
+  }
 
   const onViewFiles = () => {
     const element = document.querySelector(`#view-file-btn-${fish_code}`).click()
@@ -93,6 +103,11 @@ const PurchaseModalTable = (props) => {
                   autoComplete='off'
                 />
               </FieldError>
+              {group > 0 && quantity > 0 && (
+                <div className='mt-1 text-sm text-gray-600'>
+                  {getPurchaseDescription()}
+                </div>
+              )}
             </td>
           </tr>
           <tr>
