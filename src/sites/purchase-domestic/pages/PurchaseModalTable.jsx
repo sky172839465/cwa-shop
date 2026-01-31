@@ -30,7 +30,7 @@ const PurchaseModalTable = (props) => {
 
   // Calculate dynamic description for purchase quantity
   const getPurchaseDescription = () => {
-    if (!quantity || !group || group === 0) {
+    if (!quantity || !group) {
       return ''
     }
     const totalFish = quantity * group
