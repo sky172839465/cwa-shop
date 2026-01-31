@@ -23,6 +23,7 @@ import {
 } from 'lodash-es'
 import { atom, useAtom } from 'jotai'
 import { useIntersectionObserver } from '@react-hooks-library/core'
+import { useTranslation } from 'react-i18next'
 import useCategoryInfo from '../../../hooks/useCategoryInfo'
 import ViewFileModal from './ViewFileModal'
 import wait from '../../../utils/wait'
@@ -277,6 +278,7 @@ const SortCell = (props) => {
 }
 
 const PurchaseTable = (props) => {
+  const { t } = useTranslation()
   const {
     selectProductMap, onClickRow
   } = props
@@ -337,25 +339,25 @@ const PurchaseTable = (props) => {
             <th>項次</th>
             <td>
               <SortCell field='fish_name'>
-                品名
+                {t('fishName')}
               </SortCell>
             </td>
             <td>
               <SortCell field='fish_size'>
-                尺寸
+                {t('fishSize')}
               </SortCell>
             </td>
             <td>
               <SortCell field='unit_price'>
-                單價
+                {t('unitPrice')}
               </SortCell>
             </td>
-            <td data-desktop>建議零售價</td>
-            <td data-desktop>在庫量</td>
-            <td data-desktop>最低訂購量(隻/組)</td>
-            <td data-desktop>說明</td>
-            <td data-desktop>特殊要求</td>
-            <td data-desktop>購買數量</td>
+            <td data-desktop>{t('retailPrice')}</td>
+            <td data-desktop>{t('inventory')}</td>
+            <td data-desktop>{t('minPurchaseQuantity')}</td>
+            <td data-desktop>{t('note')}</td>
+            <td data-desktop>{t('specialRequirement')}</td>
+            <td data-desktop>{t('purchaseQuantity')}</td>
             <td data-desktop>檢視連結</td>
           </tr>
         </thead>

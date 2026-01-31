@@ -16,7 +16,7 @@ const CustomCartBottomItems = (props) => {
   const customItems = [
     <details open>
       <summary>
-        {`總折扣: ${total_discount_amt}`}
+        {`${t('totalDiscount')}: ${total_discount_amt}`}
       </summary>
       <ul>
         {map(discounts, (discount, index) => {

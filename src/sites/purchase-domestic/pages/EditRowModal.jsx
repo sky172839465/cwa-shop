@@ -1,5 +1,6 @@
 import { Form, Formik } from 'formik'
 import * as Yup from 'yup'
+import i18n from '../../../i18n'
 import PurchaseModal from '../../../components/Modal/Purchase'
 import PurchaseModalTable from './PurchaseModalTable'
 import { FORM_ITEM } from './constants'
@@ -19,7 +20,7 @@ function quantityRange(count) {
   return count >= min
     ? true
     : this.createError({
-      message: `最低訂購量為 ${min}`
+      message: `${i18n.t('minQuantityError')} ${min}`
     })
 }
 
@@ -43,6 +44,7 @@ const EditRowModal = (props) => {
     onClose,
     initialValues
   } = props
+
   return (
     <Formik
       initialValues={initialValues}

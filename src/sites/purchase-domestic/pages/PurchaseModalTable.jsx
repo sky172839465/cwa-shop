@@ -3,10 +3,12 @@ import { Field, useFormikContext } from 'formik'
 import clx from 'classnames'
 import { isEmpty } from 'lodash-es'
 import { FaEye } from 'react-icons/fa'
+import { useTranslation } from 'react-i18next'
 import { FORM_ITEM } from './constants'
 import FieldError from '../../../components/Form/FieldError'
 
 const PurchaseModalTable = (props) => {
+  const { t } = useTranslation()
   const { rowData = {}, isAddToCart, disabled } = props
   const { setValues, values } = useFormikContext()
   const editable = (!disabled && isAddToCart)
@@ -54,39 +56,39 @@ const PurchaseModalTable = (props) => {
       <table className='table table-sm'>
         <tbody>
           <tr>
-            <td>品名</td>
+            <td>{t('fishName')}</td>
             <td>{fish_name}</td>
           </tr>
           <tr>
-            <td>尺寸</td>
+            <td>{t('fishSize')}</td>
             <td>{fish_size}</td>
           </tr>
           <tr>
-            <td>單價</td>
+            <td>{t('unitPrice')}</td>
             <td>{unit_price}</td>
           </tr>
           <tr>
-            <td>建議零售價</td>
+            <td>{t('retailPrice')}</td>
             <td>{retail_price}</td>
           </tr>
           <tr>
-            <td>在庫量</td>
+            <td>{t('inventory')}</td>
             <td>{inventory}</td>
           </tr>
           <tr>
-            <td>最低訂購量(隻/組)</td>
+            <td>{t('minPurchaseQuantity')}</td>
             <td>{min_purchase_quantity}</td>
           </tr>
           <tr>
-            <td>按組購買</td>
+            <td>{t('purchaseBySet')}</td>
             <td>{`${group} 對`}</td>
           </tr>
           <tr>
-            <td>說明</td>
+            <td>{t('note')}</td>
             <td>{note}</td>
           </tr>
           <tr>
-            <td>購買數量</td>
+            <td>{t('purchaseQuantity')}</td>
             <td>
               <FieldError name={FORM_ITEM.QUANTITY}>
                 <Field
@@ -111,7 +113,7 @@ const PurchaseModalTable = (props) => {
             </td>
           </tr>
           <tr>
-            <td>特殊要求</td>
+            <td>{t('specialRequirement')}</td>
             <td>
               <Field
                 as='textarea'

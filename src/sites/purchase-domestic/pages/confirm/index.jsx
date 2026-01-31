@@ -241,12 +241,12 @@ const Confirm = () => {
                         <thead>
                           <tr className='max-sm:-top-1'>
                             <th>項次</th>
-                            <td>品名</td>
-                            <td>尺寸</td>
-                            <td>單價</td>
-                            <td className='min-w-32'>數量(隻)</td>
-                            <td>特殊要求</td>
-                            <td>金額</td>
+                            <td>{t('fishName')}</td>
+                            <td>{t('fishSize')}</td>
+                            <td>{t('unitPrice')}</td>
+                            <td className='min-w-32'>{t('quantityIndividuals')}</td>
+                            <td>{t('specialRequirement')}</td>
+                            <td>{t('itemPrice')}</td>
                             <th />
                           </tr>
                         </thead>
@@ -355,21 +355,24 @@ const Confirm = () => {
                   <div className='m-2 flex justify-between'>
                     <div className='flex flex-col gap-2'>
                       <div className='flex break-all text-sm'>
-                        總折扣：
+                        {t('totalDiscount')}
+                        ：
                         <br />
                         <span className={clx({ 'skeleton text-transparent': isLoading })}>
                           {`${new Intl.NumberFormat('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 }).format(totalDiscount)} NTD`}
                         </span>
                       </div>
                       <div className='flex break-all text-sm'>
-                        總金額：
+                        {t('totalPrice')}
+                        ：
                         <br />
                         <span className={clx({ 'skeleton text-transparent': isLoading })}>
                           {`${new Intl.NumberFormat('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 }).format(totalPrice)} NTD`}
                         </span>
                       </div>
                       <div className='flex break-all text-sm'>
-                        實際支付金額：
+                        {t('actualPayment')}
+                        ：
                         <br />
                         <span className={clx({ 'skeleton text-transparent': isLoading })}>
                           {`${new Intl.NumberFormat('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 }).format(totalPrice - totalDiscount)} NTD`}
