@@ -2,7 +2,7 @@ import clx from 'classnames'
 
 const FormRow = (props) => {
   const {
-    children, label, required, error, counter, className
+    children, label, required, error, counter, className, inputId
   } = props
   return (
     <div
@@ -11,7 +11,7 @@ const FormRow = (props) => {
         { [className]: className }
       )}
     >
-      <label className='label'>
+      <label className='label' htmlFor={inputId}>
         <span className='label-text'>
           {label}
           {required ? (<span className='px-1 font-bold text-red-400'>*</span>) : null}

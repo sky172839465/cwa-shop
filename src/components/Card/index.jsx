@@ -51,8 +51,9 @@ const Card = (props) => {
                   onChange={onChange}
                   checked={isSelected}
                   disabled={isReserving}
+                  aria-label={`Add ${itemSerial} to cart`}
                 />
-                <span className='label-text'>ADD TO CART</span>
+                <span className='label-text font-semibold'>Add to Cart</span>
               </label>
             </div>
           </div>

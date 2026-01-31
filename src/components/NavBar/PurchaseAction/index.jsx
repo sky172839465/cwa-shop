@@ -24,7 +24,7 @@ const PurchaseAction = () => {
   const order_date = useMemo(() => getOrderDate(order_deadline), [order_deadline])
   return (
     <div className='dropdown dropdown-end form-control'>
-      <label tabIndex={0} className='btn btn-ghost'>
+      <label tabIndex={0} className='btn btn-ghost' aria-label='Purchase information'>
         <FaInfoCircle size='1.5em' />
       </label>
       <ul

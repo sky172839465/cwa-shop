@@ -216,7 +216,8 @@ const Dropzone = (props) => {
       >
         <label className={clx(
           'flex justify-center w-full h-32 px-4 transition bg-base-100 border-2 border-gray-300 border-dashed rounded-md appearance-none cursor-pointer hover:border-gray-400 focus:outline-none',
-          { 'border-gray-400': isDragActive }
+          { 'border-gray-400': isDragActive },
+          { 'opacity-50 cursor-not-allowed': (disabled || isPending) }
         )}
         >
           <span className='flex items-center space-x-2'>
@@ -285,7 +286,6 @@ const Dropzone = (props) => {
                 const { file, rejectFileSize, errors = [] } = rejection
                 const { code } = get(errors, '0', {})
                 const isExceedLimit = (code === -1)
-                console.log(errors)
                 return (
                   <div
                     key={file.path}

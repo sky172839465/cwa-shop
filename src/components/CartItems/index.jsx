@@ -22,7 +22,7 @@ const CartItems = (props) => {
       <li
         key={index}
         onClick={() => onClick({ item, index })}
-        className={clx({ [className]: className })}
+        className={clx('hover:bg-base-300 cursor-pointer', { [className]: className })}
       >
         <span>{item}</span>
       </li>

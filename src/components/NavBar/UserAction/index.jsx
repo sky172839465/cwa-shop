@@ -19,7 +19,7 @@ const User = () => {
 const UserAction = (props) => {
   const { fixed } = props
   return (
-    <div className='btn btn-ghost'>
+    <div className='btn btn-ghost' aria-label='User information'>
       <div
         className='tooltip tooltip-bottom'
         data-tip={`v${window.APP_VERSION}`}

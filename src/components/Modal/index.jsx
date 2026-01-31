@@ -26,7 +26,7 @@ const ModalActions = (props) => {
       <button type='button' className='btn' onClick={onModalClose}>
         {closeText}
       </button>
-      <button type='submit' className='btn' onClick={() => onModalOk && onModalOk()}>
+      <button type='submit' className='btn btn-primary' onClick={() => onModalOk && onModalOk()}>
         {okText}
       </button>
     </div>
@@ -145,6 +145,7 @@ const Modal = (props) => {
               type='button'
               className='btn btn-circle btn-sm'
               onClick={onModalClose}
+              aria-label='Close'
             >
               <MdOutlineClose size='1.5em' />
             </button>
