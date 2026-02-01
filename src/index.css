@@ -1,6 +1,10 @@
-@import url("tailwindcss");
+@import "tailwindcss";
 
-@plugin "daisyui";
+/* stylelint-disable property-no-unknown */
+@plugin "daisyui" {
+  themes: light;
+}
+/* stylelint-enable property-no-unknown */
 
 @theme {
   --height-screen-fill: -webkit-fill-available;
