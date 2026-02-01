@@ -158,7 +158,7 @@ const ProductModal = (props) => {
         <a
           target='_blank'
           rel='noreferrer noopener'
-          className='btn btn-circle fixed bottom-2 right-2'
+          className='btn btn-circle fixed bottom-2 right-2 flex items-center justify-center'
           href={largeImgUrl}
         >
           <MdOpenInNew size='1.5rem' />

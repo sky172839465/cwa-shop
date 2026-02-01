@@ -17,4 +17,8 @@
   body {
     @apply overscroll-none md:overscroll-x-auto;
   }
+
+  .label {
+    @apply px-1 py-2;
+  }
 }
