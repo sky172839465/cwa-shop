@@ -18,9 +18,9 @@ const FormRow = (props) => {
         </span>
       </label>
       {children}
-      {error && (
-        <div className='mt-1 text-sm text-red-400'>{error}</div>
-      )}
+      <div className='mt-1 text-sm text-red-400' style={{ minHeight: '1.25rem' }}>
+        {error || '\u00A0'}
+      </div>
       {counter && (
         <div className='mt-1 text-sm text-right'>{counter}</div>
       )}
