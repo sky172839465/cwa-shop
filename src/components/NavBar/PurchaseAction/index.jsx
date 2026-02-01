@@ -23,7 +23,7 @@ const PurchaseAction = () => {
   } = useGetCategoryList()
   const order_date = useMemo(() => getOrderDate(order_deadline), [order_deadline])
   return (
-    <div className='dropdown dropdown-end'>
+    <div className='dropdown dropdown-end form-control'>
       <label tabIndex={0} className='btn btn-ghost'>
         <FaInfoCircle size='1.5em' />
       </label>
@@ -33,28 +33,28 @@ const PurchaseAction = () => {
       >
         <li>
           <label className='label cursor-pointer'>
-            <span>
+            <span className='label-text'>
               {`店家名稱：${user}`}
             </span>
           </label>
         </li>
         <li>
           <label className='label cursor-pointer'>
-            <span>
+            <span className='label-text'>
               {`預計出貨日：${delivery_date}`}
             </span>
           </label>
         </li>
         <li>
           <label className='label cursor-pointer'>
-            <span>
+            <span className='label-text'>
               {`報價單更新日期：${update_date}`}
             </span>
           </label>
         </li>
         <li>
           <label className='label cursor-pointer'>
-            <span>
+            <span className='label-text'>
               {`訂單截止日期：${order_date}`}
             </span>
           </label>

@@ -83,7 +83,7 @@ const Option = (props) => {
 
   return (
     <label className='label cursor-pointer'>
-      <span>{label}</span>
+      <span className='label-text'>{label}</span>
       <input
         type='checkbox'
         className='toggle toggle-primary'

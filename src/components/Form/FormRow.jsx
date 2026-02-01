@@ -7,21 +7,21 @@ const FormRow = (props) => {
   return (
     <div
       className={clx(
-        'mb-2 w-full',
+        'form-control mb-2 w-full',
         { [className]: className }
       )}
     >
       <label className='label'>
-        <span>
+        <span className='label-text'>
           {label}
           {required ? (<span className='px-1 font-bold text-red-400'>*</span>) : null}
         </span>
       </label>
       {children}
-      <div className='label'>
-        <span className='text-xs text-red-400 empty:before:inline-block'>{error}</span>
-        <span className='text-xs'>{counter}</span>
-      </div>
+      <label className='label'>
+        <span className='label-text-alt text-red-400 empty:before:inline-block'>{error}</span>
+        <span className='label-text-alt'>{counter}</span>
+      </label>
     </div>
   )
 }

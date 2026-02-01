@@ -168,7 +168,7 @@ const EditModal = (props) => {
                 >
                   <Field
                     name={FORM.ITEM_SERIAL}
-                    className='input'
+                    className='input input-bordered'
                     inputMode='numeric'
                     autoComplete='off'
                   />
@@ -181,7 +181,7 @@ const EditModal = (props) => {
                     as='select'
                     name={FORM.FISH_TYPE}
                     className={clx(
-                      'select w-full'
+                      'select select-bordered w-full'
                     )}
                     disabled={isLoading}
                   >

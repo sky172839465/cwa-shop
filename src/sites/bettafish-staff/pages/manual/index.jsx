@@ -136,7 +136,7 @@ const Product = () => {
                 as='select'
                 name={FORM.TYPE}
                 className={clx(
-                  'select w-full lg:max-w-xs'
+                  'select select-bordered w-full lg:max-w-xs'
                 )}
                 disabled={isMutating}
               >
@@ -160,7 +160,7 @@ const Product = () => {
                 type='text'
                 name={FORM.ITEM_SERIAL}
                 placeholder='Type here'
-                className='input w-full lg:max-w-xs'
+                className='input input-bordered w-full lg:max-w-xs'
                 autoComplete='off'
                 disabled={isMutating}
               />

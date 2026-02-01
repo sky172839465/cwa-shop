@@ -49,7 +49,7 @@ const Confirm = () => {
                   <td>
                     <input
                       type='text'
-                      className='input input-sm w-40'
+                      className='input input-sm input-bordered w-40'
                       defaultValue={`特殊要求${index}`}
                     />
                   </td>

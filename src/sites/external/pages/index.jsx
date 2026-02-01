@@ -59,7 +59,7 @@ const SelectSection = () => {
     <div className='w-full p-4'>
       <select
         className={clx(
-          'select w-full'
+          'select select-bordered w-full'
         )}
         onChange={onSelectType}
         defaultValue={fishType}

@@ -81,7 +81,7 @@ const PurchaseModalTable = (props) => {
                     type='text'
                     inputMode='numeric'
                     className={clx(
-                      'input join-item w-full lg:max-w-xs',
+                      'input input-bordered join-item w-full lg:max-w-xs',
                       { '!text-black': !editable }
                     )}
                     min={min_purchase_quantity}
@@ -90,7 +90,7 @@ const PurchaseModalTable = (props) => {
                     autoComplete='off'
                   />
                   <input
-                    className='input join-item min-w-[130px]'
+                    className='input join-item input-bordered min-w-[130px]'
                     value={`(組) 共 ${quantity * group} 隻`}
                     readOnly
                   />
@@ -104,7 +104,7 @@ const PurchaseModalTable = (props) => {
               <Field
                 as='textarea'
                 name={FORM_ITEM.REQUEST}
-                className='textarea w-full resize-none'
+                className='textarea textarea-bordered w-full resize-none'
                 disabled={!editable}
               />
             </td>

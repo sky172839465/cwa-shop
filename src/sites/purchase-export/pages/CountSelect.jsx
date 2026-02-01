@@ -6,7 +6,7 @@ const CountSelect = (props) => {
   return (
     <select
       className={clx(
-        'select select-sm w-full',
+        'select select-sm select-bordered w-full',
         { [className]: className }
       )}
       // onChange={onSelectType}

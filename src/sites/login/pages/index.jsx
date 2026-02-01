@@ -23,19 +23,19 @@ const Login = () => {
           >
             {({ values }) => (
               <Form className='card-body'>
-                <div>
+                <div className='form-control'>
                   <label className='label'>
-                    <span>Token Type</span>
+                    <span className='label-text'>Token Type</span>
                   </label>
-                  <Field name={FORM.TOKEN_TYPE} className='input' required />
+                  <Field name={FORM.TOKEN_TYPE} className='input input-bordered' required />
                 </div>
-                <div>
+                <div className='form-control'>
                   <label className='label'>
-                    <span>Access Token</span>
+                    <span className='label-text'>Access Token</span>
                   </label>
-                  <Field name={FORM.ACCESS_TOKEN} className='input' required />
+                  <Field name={FORM.ACCESS_TOKEN} className='input input-bordered' required />
                 </div>
-                <div className='mt-6'>
+                <div className='form-control mt-6'>
                   <a
                     className='btn btn-primary'
                     href={`${window.location.origin}${window.APP_BASENAME}${loginPathName}#${qs.stringify(values)}`}
