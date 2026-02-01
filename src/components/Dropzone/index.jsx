@@ -187,7 +187,7 @@ const Dropzone = (props) => {
     <>
       {
         isSelectFolder && (
-          <div className='w-full'>
+          <div className='w-full flex flex-col gap-4'>
             {SELECT_TYPE_OPTIONS.map((option, index) => (
               <label className='label cursor-pointer' key={index}>
                 <input
