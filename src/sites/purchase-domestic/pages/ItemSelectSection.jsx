@@ -18,7 +18,7 @@ const ItemSelectSection = () => {
     <div className='w-full'>
       <select
         className={clx(
-          'select select-sm select-bordered w-full'
+          'select select-sm w-full'
         )}
         onChange={onSelectType}
         value={defaultType}

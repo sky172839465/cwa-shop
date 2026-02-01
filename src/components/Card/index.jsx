@@ -43,18 +43,16 @@ const Card = (props) => {
             </div>
           </h2>
           <div className='card-actions justify-end'>
-            <div className='form-control'>
-              <label className='label cursor-pointer'>
-                <input
-                  type='checkbox'
-                  className='checkbox-primary checkbox mr-2'
-                  onChange={onChange}
-                  checked={isSelected}
-                  disabled={isReserving}
-                />
-                <span className='label-text'>ADD TO CART</span>
-              </label>
-            </div>
+            <label className='label cursor-pointer'>
+              <input
+                type='checkbox'
+                className='checkbox-primary checkbox mr-2'
+                onChange={onChange}
+                checked={isSelected}
+                disabled={isReserving}
+              />
+              <span>ADD TO CART</span>
+            </label>
           </div>
         </div>
       </div>

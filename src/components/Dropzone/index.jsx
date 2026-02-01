@@ -199,7 +199,7 @@ const Dropzone = (props) => {
                   onChange={onSelectType}
                   disabled={isPending}
                 />
-                <span className='label-text w-full pl-4'>
+                <span className='w-full pl-4'>
                   {option.label}
                 </span>
               </label>

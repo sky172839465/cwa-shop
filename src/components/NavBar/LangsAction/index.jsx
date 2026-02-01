@@ -42,7 +42,7 @@ const LangsAction = () => {
   }
 
   return (
-    <div className='dropdown dropdown-end form-control'>
+    <div className='dropdown dropdown-end'>
       <label tabIndex={0} className='btn btn-ghost'>
         <MdGTranslate size='1.5em' />
       </label>
@@ -62,7 +62,7 @@ const LangsAction = () => {
                   onChange={onChangeLang}
                   value={value}
                 />
-                <span className='label-text'>{label}</span>
+                <span>{label}</span>
               </label>
             </li>
           )

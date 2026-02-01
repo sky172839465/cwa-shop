@@ -196,7 +196,7 @@ const Quotation = () => {
                 <Field
                   type='datetime-local'
                   name={FORM.ORDER_DEADLINE}
-                  className='input input-bordered w-full lg:max-w-xs'
+                  className='input w-full lg:max-w-xs'
                   autoComplete='off'
                   disabled={isMutating || !isAssetsUploaded}
                 />
@@ -209,7 +209,7 @@ const Quotation = () => {
                 <Field
                   type='datetime-local'
                   name={FORM.DELIVERY_DATE}
-                  className='input input-bordered w-full lg:max-w-xs'
+                  className='input w-full lg:max-w-xs'
                   autoComplete='off'
                   disabled={isMutating || !isAssetsUploaded}
                 />
