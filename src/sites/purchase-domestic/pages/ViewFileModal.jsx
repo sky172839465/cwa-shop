@@ -26,7 +26,7 @@ const SliderArrow = (props) => {
         customClassName,
         'fixed top-[46%]',
         'btn btn-circle glass btn-md flex items-center justify-center z-10',
-        '[&_svg]:relative [&_svg]:pl-2'
+        '[&_svg]:relative [&_svg]:left-2'
       )}
       style={style}
       onClick={onClick}
