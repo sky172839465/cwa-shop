@@ -40,10 +40,13 @@ export default [
       import: importPlugin
     },
     rules: {
-      // Airbnb base rules adapted for flat config
+      // React plugin recommended rules
       ...reactPlugin.configs.recommended.rules,
       ...reactPlugin.configs['jsx-runtime'].rules,
-      ...reactHooksPlugin.configs.recommended.rules,
+      
+      // React Hooks rules
+      'react-hooks/rules-of-hooks': 'error',
+      'react-hooks/exhaustive-deps': 'warn',
       
       // Custom overrides
       'react-refresh/only-export-components': [
