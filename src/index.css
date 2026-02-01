@@ -2,7 +2,9 @@
 
 /* stylelint-disable property-no-unknown */
 @plugin "daisyui" {
-  themes: light;
+  themes: light --default, light --prefersdark;
+  logs: false;
+  exclude: properties;
 }
 /* stylelint-enable property-no-unknown */
 
