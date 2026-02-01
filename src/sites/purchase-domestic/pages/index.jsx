@@ -201,7 +201,7 @@ const PurchaseDomestic = () => {
           <div className='flex-1'>
             <ItemSelectSection />
           </div>
-          <div className='flex-1'>
+          <div className='flex-auto min-w-[30%]'>
             <SearchMenu name='search' />
           </div>
         </div>
