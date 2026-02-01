@@ -25,7 +25,7 @@ const SliderArrow = (props) => {
       className={clx(
         customClassName,
         'fixed top-[46%]',
-        'btn btn-circle glass btn-md text-center pl-[0.8rem] z-10'
+        'btn btn-circle glass btn-md flex items-center justify-center z-10'
       )}
       style={style}
       onClick={onClick}

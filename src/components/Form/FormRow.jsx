@@ -7,7 +7,7 @@ const FormRow = (props) => {
   return (
     <div
       className={clx(
-        'form-control mb-2 w-full',
+        'mb-2 w-full',
         { [className]: className }
       )}
     >
@@ -18,10 +18,12 @@ const FormRow = (props) => {
         </span>
       </label>
       {children}
-      <label className='label'>
-        <span className='label-text-alt text-red-400 empty:before:inline-block'>{error}</span>
-        <span className='label-text-alt'>{counter}</span>
-      </label>
+      {error && (
+        <div className='mt-1 text-sm text-red-400'>{error}</div>
+      )}
+      {counter && (
+        <div className='mt-1 text-sm text-right'>{counter}</div>
+      )}
     </div>
   )
 }
