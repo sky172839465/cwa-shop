@@ -2,7 +2,13 @@
 
 /* stylelint-disable property-no-unknown */
 @plugin "daisyui" {
+  styled: true;
   themes: light;
+  base: true;
+  utils: true;
+  logs: false;
+  rtl: false;
+  prefix: "";
 }
 /* stylelint-enable property-no-unknown */
 
