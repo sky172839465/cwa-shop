@@ -10,10 +10,11 @@ export default [
     url: `${awsHostPrefix}/checkAuthorize`,
     method: 'get',
     timeout: 100,
+    statusCode: 200,
     response: (response) => {
       const authorization = get(response, 'headers.authorization')
       if (isEmpty(authorization)) {
-        return { message: 'Unauthorized' }
+        return { message: 'Unauthorized', reason: 'Token missing' }
       }
       return { message: 'MOCK USER' }
     }

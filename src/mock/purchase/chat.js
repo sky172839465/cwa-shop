@@ -34,7 +34,7 @@ export default [
     response: () => {
       return {
         status: 'success',
-        records: times(random(10, 20)).map((index) => {
+        records: times(10).map((index) => {
           return {
             question: `This is question ${index}`,
             reply: getRecommendations(),
@@ -48,20 +48,27 @@ export default [
     url: `${awsHostPrefix}/recommendations`,
     method: 'post',
     timeout: 3000,
-    response: ({ query: stringObject }) => {
+    response: ({ body = {} }) => {
       const {
         query = 'recommendations 問題'
-      } = JSON.parse(JSON.stringify(stringObject))
-      const error = random(0, 1)
-      if (error === 1) {
+      } = body
+      const error = random(0, 5)
+      if (error === 5) {
         return {
-          success: false
+          success: false,
+          response: 'Error processing request',
+          results: []
         }
       }
 
       return {
         success: true,
-        ...getRecommendations(query)
+        ...getRecommendations(query),
+        _usage: {
+          inputTokens: 150,
+          outputTokens: 200,
+          totalTokens: 350
+        }
       }
     }
   }

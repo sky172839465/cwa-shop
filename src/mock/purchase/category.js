@@ -32,8 +32,6 @@ const getFakeImage = (width, height, text) => {
   return `https://dummyimage.com/${width}x${height}/?text=${text}&font=lobster&font_size=50`
 }
 
-// let categoryinfoCallCount = 0
-
 export default [
   {
     url: `${awsHostPrefix}/getcategorylist`,
@@ -51,7 +49,7 @@ export default [
         results: {
           update_date: '2024-05-27',
           delivery_date: '2024-06-01',
-          order_deadline: '2024-10-22T14:59:59Z',
+          order_deadline: '2025-11-23T18:00:00Z',
           category_list
         }
       }
@@ -69,23 +67,21 @@ export default [
       } = JSON.parse(JSON.stringify(stringObject))
       const isFishCodeEmpty = isEmpty(fish_code)
       const isUUIDEmpty = isEmpty(uuid)
-      const fishCodes = isFishCodeEmpty ? times(random(99, 100)) : fish_code.split(',')
-      const items = fishCodes.map((fishCode, index) => {
+      const fishCodes = isFishCodeEmpty ? times(random(10, 20)) : fish_code.split(',')
+      const items = fishCodes.map((fCode, index) => {
         const cat = category || CATEGORIES[random(0, 2)]
         const fishName = isUUIDEmpty ? `fish_name_${cat}_${index}` : `fish_name_$${uuid}_${index}`
         return {
-          fish_code: isFishCodeEmpty ? `FF120L${index}` : fishCode,
-          science_name: `science_name_${index}`,
+          fish_code: isFishCodeEmpty ? `FF120L${index}` : fCode,
+          scientific_name: `scientific_name_${index}`,
           fish_name: fishName,
           fish_size: FISH_SIZES[random(0, 2)],
           unit_price: random(10, 100),
           retail_price: random(10, 100),
-          group: random(1, 5),
-          inventory: [random(50, 100), -1][random(0, 1)],
+          group: `${random(1, 5)}`,
+          inventory: random(50, 100),
           min_purchase_quantity: random(10, 20),
           note: ['', `note_${index}`][random(0, 1)],
-          image_link: getFakeImage(100, 100, `${cat}-${fishName}`),
-          video_link: videos[random(0, 2)],
           image_links: times(3).map((imageIndex) => getFakeImage(100, 100, `${cat}-${fishName}-${imageIndex}`)),
           video_links: videos.slice(random(0, 2))
         }
@@ -93,6 +89,7 @@ export default [
       return {
         status: 'success',
         results: {
+          message: '操作結果描述',
           items
         }
       }
@@ -110,7 +107,7 @@ export default [
         const fishName = `fish_name＿${phrase}_${index}`
         return {
           fish_code: `FF120L${index}`,
-          science_name: `science_name_${phrase}_${index}`,
+          scientific_name: `scientific_name_${phrase}_${index}`,
           fish_name: fishName,
           fish_size: FISH_SIZES[random(0, 2)],
           unit_price: random(10, 100),
@@ -118,8 +115,8 @@ export default [
           inventory: random(10, 100),
           min_purchase_quantity: random(10, 20),
           note: ['', `note_${index}`][random(0, 1)],
-          image_link: getFakeImage(100, 100, `${phrase}-${fishName}`),
-          video_link: videos[random(0, 2)]
+          image_links: [getFakeImage(100, 100, `${phrase}-${fishName}`)],
+          video_links: [videos[random(0, 2)]]
         }
       })
       return {
@@ -163,7 +160,7 @@ export default [
         const fishName = `fish_name_${cat}_${index}`
         return {
           fish_code: `FF120L${index}`,
-          science_name: `science_name_${index}`,
+          scientific_name: `scientific_name_${index}`,
           fish_name: fishName,
           fish_size: FISH_SIZES[random(0, 2)],
           unit_price: random(10, 100),
@@ -171,8 +168,8 @@ export default [
           inventory: random(10, 100),
           box_qty: random(10, 20),
           note: ['', `note_${index}`][random(0, 1)],
-          image_link: getFakeImage(100, 100, `${cat}-${fishName}`),
-          video_link: videos[random(0, 2)]
+          image_links: [getFakeImage(100, 100, `${cat}-${fishName}`)],
+          video_links: [videos[random(0, 2)]]
         }
       })
       return {
@@ -195,7 +192,7 @@ export default [
         const fishName = `fish_name＿${phrase}_${index}`
         return {
           fish_code: `FF120L${index}`,
-          science_name: `science_name_${phrase}_${index}`,
+          scientific_name: `scientific_name_${phrase}_${index}`,
           fish_name: fishName,
           fish_size: FISH_SIZES[random(0, 2)],
           unit_price: random(10, 100),
@@ -203,8 +200,8 @@ export default [
           inventory: random(10, 100),
           box_qty: random(10, 20),
           note: ['', `note_${index}`][random(0, 1)],
-          image_link: getFakeImage(100, 100, `${phrase}-${fishName}`),
-          video_link: videos[random(0, 2)]
+          image_links: [getFakeImage(100, 100, `${phrase}-${fishName}`)],
+          video_links: [videos[random(0, 2)]]
         }
       })
       return {

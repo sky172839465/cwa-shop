@@ -14,9 +14,17 @@ export default [
       const isSuccess = random(0, 5) > 1
       const results = isSuccess
         ? {
-          message: '成功處理150筆數據',
-          success_count: 150,
-          download_url: 'https://s3.amazonaws.com/bucket/upload/2.arranged_tank_no/arranged_202509'
+          message: '新購進魚資料處理完成',
+          success_count: 42,
+          fail_count: 1,
+          validation_errors: [
+            {
+              row_number: 5,
+              field_name: 'fishType',
+              error_message: '魚種編號不存在'
+            }
+          ],
+          download_url: 'https://cwafightfish2.s3.ap-southeast-1.amazonaws.com/results/upload_result_20260306.xlsx'
         }
         : {
           message: '文件格式錯誤',
@@ -35,7 +43,7 @@ export default [
           ]
         }
       return {
-        status: isSuccess ? 'success' : 'fail',
+        status: 'success',
         results
       }
     }
@@ -48,8 +56,12 @@ export default [
       const isSuccess = random(0, 5) > 1
       const results = isSuccess
         ? {
-          message: '櫃位數據導入成功',
-          success_count: 45
+          message: '櫃位資料更新完成，已備份舊資料',
+          backup_id: `backup_${new Date().getTime()}`,
+          backup_time: new Date().toISOString(),
+          success_count: 120,
+          fail_count: 0,
+          validation_errors: []
         }
         : {
           message: '文件格式錯誤',
@@ -61,7 +73,7 @@ export default [
           ]
         }
       return {
-        status: isSuccess ? 'success' : 'fail',
+        status: 'success',
         results
       }
     }
@@ -71,43 +83,15 @@ export default [
     method: 'get',
     timeout: 100,
     response: () => {
-      const isSuccess = random(0, 5) > 1
-      const results = isSuccess
-        ? {
-          data: [
-            '2025-09-24T10:00:00Z',
-            '2025-09-25T10:00:00Z'
-          ]
-        }
-        : {
-          message: '找不到指定時間點的備份數據'
-        }
-      return {
-        status: isSuccess ? 'success' : 'fail',
-        results
+      const results = {
+        message: '成功獲取可恢復時間點列表',
+        data: [
+          '2025-09-24T10:00:00Z',
+          '2025-09-25T10:00:00Z'
+        ]
       }
-    }
-  },
-  {
-    url: `${awsHostPrefix}/recoveredata`,
-    method: 'post',
-    timeout: 100,
-    response: ({ body }) => {
-      const { recovery_point } = body
-      const isSuccess = random(0, 5) > 1
-      const results = isSuccess
-        ? {
-          message: '數據恢復成功',
-          recovered_to: recovery_point
-        }
-        : {
-          message: '找不到指定時間點的備份數據',
-          validation_errors: [{
-            error_message: '備份文件不存在或已損毀'
-          }]
-        }
       return {
-        status: isSuccess ? 'success' : 'fail',
+        status: 'success',
         results
       }
     }
@@ -120,26 +104,20 @@ export default [
       const {
         system_type = 'empty'
       } = JSON.parse(JSON.stringify(stringObject))
-      const isSuccess = random(0, 5) > 1
-      const results = isSuccess
-        ? {
-          systems: system_type === 'empty'
-            ? ['external', 'internal'].map((type) => {
-              return {
-                system_type: type,
-                status: ['on', 'off'][random(0, 1)]
-              }
-            })
-            : [{
-              system_type,
-              status: ['on', 'off'][random(0, 1)]
-            }]
-        }
-        : {
-          message: '獲取系統狀態失敗'
-        }
+      const results = {
+        message: '成功返回系統狀態',
+        systems: system_type === 'empty'
+          ? [
+            { system_type: 'external', status: 'on' },
+            { system_type: 'internal', status: 'off' }
+          ]
+          : [{
+            system_type,
+            status: ['on', 'off'][random(0, 1)]
+          }]
+      }
       return {
-        status: isSuccess ? 'success' : 'fail',
+        status: 'success',
         results
       }
     }
@@ -153,20 +131,15 @@ export default [
         system_type,
         action
       } = body
-      const isSuccess = random(0, 5) > 1
-      const results = isSuccess
-        ? {
-          message: '鬥魚系統狀態更新成功',
-          systems: [{
-            system_type,
-            status: action
-          }]
-        }
-        : {
-          message: '系統忙線中，請稍後再試'
-        }
+      const results = {
+        message: '鬥魚系統狀態更新成功',
+        systems: [{
+          system_type,
+          status: action
+        }]
+      }
       return {
-        status: isSuccess ? 'success' : 'fail',
+        status: 'success',
         results
       }
     }
