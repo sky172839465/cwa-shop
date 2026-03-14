@@ -13,8 +13,8 @@ export default [
         parts = 1
       } = JSON.parse(JSON.stringify(stringObject))
       return {
-        fileId: 'fileId',
-        fileKey: 'mockFileKey.mov',
+        fileId: 'SdNmR__VjCtFb6rfEPYQmnXOrT22gMOODs1XZLMR58Oum_C399tPJrN36oTqDUbYrdRALajJICFO7nQVDvXCUBy9.9aeyiOWZLH61JqDd7wIp3f9OjoIs1U3hIEJyHSnzHR1a0M6S6B1gcHlPjrrTloN4mffnEheTTaaHrYgF1s-',
+        fileKey: 'tmp/mockFileKey.mov',
         parts: times(+parts, (index) => {
           const PartNumber = index + 1
           return {
@@ -35,6 +35,9 @@ export default [
     url: `${getApiPrefix()}/finalize`,
     method: 'post',
     timeout: 100,
-    response: () => ({})
+    response: () => ({
+      status: 'success',
+      message: '成功完成上傳'
+    })
   }
 ]

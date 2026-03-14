@@ -81,7 +81,10 @@ const getFishInfo = (itemSerial) => ({
       }
     })
   ],
-  itemVideos: (+itemSerial % 2 === 0) ? [] : [{ productVideo: videos[random(0, 2)] }]
+  itemVideos: (+itemSerial % 2 === 0) ? [] : [{
+    productVideo: videos[random(0, 2)],
+    snapshotVideo: getFakeImage(600, 400, `VideoSnapshot${itemSerial}`)
+  }]
 })
 
 export default [
@@ -105,11 +108,11 @@ export default [
             `${convertedLang}.${type.fishType}`,
             get(fishNameMapByLang, `en.${type.fishType}`)
           ),
-          fishPrice: TYPE_PRICE[type.fishType],
+          fishPrice: `${TYPE_PRICE[type.fishType]}.00`,
           currency: 'TWD'
         }
       }))
-      return { message: 'success', results }
+      return { status: 'success', results }
     }
   },
   {
@@ -120,8 +123,8 @@ export default [
       const {
         fishType
       } = JSON.parse(JSON.stringify(stringObject))
-      const results = fishDataMap[fishType]
-      return { message: 'success', results }
+      const results = fishDataMap[fishType] || []
+      return { status: 'success', results }
     }
   },
   {
@@ -133,7 +136,7 @@ export default [
         itemSerial
       } = JSON.parse(JSON.stringify(stringObject))
       const results = getFishInfo(itemSerial)
-      return { message: 'success', results }
+      return { status: 'success', results }
     }
   },
   {
@@ -152,7 +155,7 @@ export default [
           items: get(fishDataMap, TYPE_KEY.C).slice(2, 7).map((item) => item.itemSerial)
         }
       }
-      return { message: 'success', results }
+      return { status: 'success', results }
     }
   },
   {
@@ -176,7 +179,7 @@ export default [
               : 'booked by other'
           }
         })
-      return { message: 'success', results }
+      return { status: 'success', results }
     }
   },
   {
@@ -189,8 +192,8 @@ export default [
         .map((fishData) => fishData.slice(0, random(3, 6)))
         .map((fishData) => {
           const items = map(fishData, 'itemSerial')
-          const unitPrice = get(fishData, '0.itemPrice', '0')
-          const subTotal = size(items) * unitPrice
+          const unitPrice = `${get(fishData, '0.itemPrice', '0')}.00`
+          const subTotal = `${size(items) * parseFloat(unitPrice)}.00`
           return { items, unitPrice, subTotal }
         })
       const [resultA, resultB, resultC] = result
@@ -199,10 +202,11 @@ export default [
         [TYPE_KEY.B]: resultB,
         [TYPE_KEY.C]: resultC,
         orderTotalQuantity: sum(map(result, (typeItem) => size(typeItem.items))),
-        orderTotalPrice: sum(map(result, (typeItem) => typeItem.subTotal)),
-        currency: 'TWD'
+        orderTotalPrice: `${sum(map(result, (typeItem) => parseFloat(typeItem.subTotal)))}.00`,
+        currency: 'TWD',
+        soldItems: []
       }
-      return { message: 'success', results }
+      return { status: 'success', results }
     }
   }
 ]

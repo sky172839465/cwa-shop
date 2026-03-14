@@ -11,76 +11,22 @@ export default [
     method: 'post',
     timeout: 100,
     response: () => {
-      const isSuccess = [true, false][random(0, 1)]
-      const result = isSuccess
-        ? { success_count: random(100, 500) }
+      const isSuccess = random(0, 5) > 1
+      const results = isSuccess
+        ? {
+          validation: 'passed',
+          success_count: 5,
+          fail_count: 0
+        }
         : {
-          fail_count: random(0, 5),
-          fail_description: ['第11筆記錄FF1322L資料重複']
+          validation: 'failed',
+          success_count: 0,
+          fail_count: 1,
+          fail_description: ['Excel驗證未通過']
         }
       return {
-        message: 'success',
-        results: {
-          category_count: random(100, 500),
-          subcategory_count: random(10, 50),
-          ...result
-        }
-      }
-    }
-  },
-  {
-    url: `${awsHostPrefix}/demandreport`,
-    method: 'post',
-    timeout: 100,
-    response: () => {
-      return {
-        message: 'success',
-        reason: '已寄發信件'
-      }
-    }
-  },
-  {
-    url: `${awsHostPrefix}/uploaddemandreport`,
-    method: 'post',
-    timeout: 100,
-    response: () => {
-      return {
-        message: 'success',
-        results: {
-          success_count: random(0, 1000),
-          fail_count: random(0, 100),
-          fail_description: ['欄位不符', null][random(0, 1)]
-        }
-      }
-    }
-  },
-  {
-    url: `${awsHostPrefix}/uploadpurchaseorder`,
-    method: 'post',
-    timeout: 100,
-    response: () => {
-      return {
-        message: 'success',
-        results: {
-          success_count: random(0, 1000),
-          fail_count: random(0, 100),
-          fail_description: ['欄位不符', null][random(0, 1)]
-        }
-      }
-    }
-  },
-  {
-    url: `${awsHostPrefix}/uploadshippingorder`,
-    method: 'post',
-    timeout: 100,
-    response: () => {
-      return {
-        message: 'success',
-        results: {
-          success_count: random(0, 1000),
-          fail_count: random(0, 100),
-          fail_description: ['欄位不符', null][random(0, 1)]
-        }
+        status: isSuccess ? 'success' : 'fail',
+        results
       }
     }
   },
@@ -90,7 +36,7 @@ export default [
     timeout: 100,
     response: () => {
       return {
-        message: 'success',
+        status: 'success',
         results: {
           success_count: random(0, 1000),
           fail_count: random(0, 100),
