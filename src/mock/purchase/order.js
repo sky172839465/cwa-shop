@@ -19,6 +19,16 @@ const statusList = [
   { status: 'success', message: '正常' }
 ]
 
+const videos = [
+  'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+  'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
+  'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4'
+]
+
+const getFakeImage = (width, height, text) => {
+  return `https://dummyimage.com/${width}x${height}/?text=${text}&font=lobster&font_size=50`
+}
+
 const getRecommendations = () => {
   return {
     results: times(random(2, 5)).map((index) => {
@@ -38,6 +48,8 @@ const getRecommendations = () => {
         retail_price: `${random(10, 100)}.0`,
         inventory: random(20, 100),
         note: ['', `note_${index}`][random(0, 1)],
+        image_link: getFakeImage(100, 100, fishName),
+        video_link: videos[random(0, 2)],
         ...(statusList[random(0, size(statusList - 1))])
       }
     })
@@ -63,6 +75,8 @@ export default [
               request,
               unit_price: `${random(100, 200)}.0`,
               group,
+              image_link: getFakeImage(100, 100, fish_code),
+              video_link: videos[random(0, 2)],
               ...(statusList[random(0, size(statusList - 1))])
             }
           }),
@@ -136,6 +150,8 @@ export default [
               request,
               unit_price: `${random(1000, 2000)}.0`,
               group,
+              image_link: getFakeImage(100, 100, fish_code),
+              video_link: videos[random(0, 2)],
               ...(statusList[random(0, size(statusList - 1))])
             }
           }),
