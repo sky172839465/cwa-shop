@@ -123,6 +123,7 @@ const UploadTankInfo = () => {
 
     toast.success(get(result, 'results.message', 'Success'), { id: toastId })
     modalRef.current.close()
+    getRecoveryStatus()
   }
 
   return (
@@ -171,7 +172,7 @@ const UploadTankInfo = () => {
             {recoveryStatus && (
               <button
                 type='button'
-                className='btn btn-outline btn-disabled'
+                className='btn btn-outline pointer-events-none'
               >
                 {`${recoveryStatus} + ${recoveryStaffName}`}
               </button>
@@ -234,9 +235,12 @@ const UploadTankInfo = () => {
           >
             {(actions) => (
               <Form className='flex flex-col gap-4'>
-                <div className='alert alert-warning'>
+                <div className='alert alert-error'>
                   <MdInfo size='1.5em' />
                   <span>{targetRecoveryPoint}</span>
+                </div>
+                <div className='text-sm text-gray-500'>
+                  {t('recoveryAuthDescription')}
                 </div>
                 <FormRow label={t('selectStaff')} required>
                   <Field
@@ -247,7 +251,7 @@ const UploadTankInfo = () => {
                     <option value='' disabled>{t('selectStaff')}</option>
                     {staffList.map((staff) => (
                       <option key={staff.staff_id} value={staff.staff_id}>
-                        {`${staff.staff_id} + ${staff.staff_name}`}
+                        {`(${staff.staff_id}) ${staff.staff_name}`}
                       </option>
                     ))}
                   </Field>

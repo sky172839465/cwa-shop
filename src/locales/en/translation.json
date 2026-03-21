@@ -37,6 +37,7 @@
   "confirm": "Confirm",
   "selectStaff": "Select Staff",
   "dataRecoveryConfirmation": "Data Recovery Confirmation",
+  "recoveryAuthDescription": "To perform a data recovery operation, authorization from the \"Administrator\" is required. To proceed, confirm your identity and click the \"Confirm\" button to submit the application.",
   "uploadTankInfoDesc": "Upload the shelf excel arranged by the system",
   "uploadNewFishDesc": "Upload the summary information of the newly purchased fish excel first",
   "uploadExcelLabel": "Upload Excel(.xlsx)",

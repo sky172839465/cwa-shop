@@ -37,6 +37,7 @@
   "confirm": "確認",
   "selectStaff": "請選擇身份",
   "dataRecoveryConfirmation": "資料恢復確認",
+  "recoveryAuthDescription": "執行數據恢復操作，需要得到“管理員“授權。若要執行，確認身份後點擊\"確認“按鈕提交申請。",
   "uploadTankInfoDesc": "上傳系統排好的櫃位excel",
   "uploadNewFishDesc": "先上傳新購進魚的excel匯總信息",
   "uploadExcelLabel": "上傳 Excel(.xlsx)",

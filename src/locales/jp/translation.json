@@ -37,6 +37,7 @@
   "confirm": "確認",
   "selectStaff": "従業員を選択",
   "dataRecoveryConfirmation": "データ復旧の確認",
+  "recoveryAuthDescription": "データ復旧操作を実行するには、「管理者」からの承認が必要です。続行するには、本人確認を行い、[確認]ボタンをクリックして申請を送信してください。",
   "uploadTankInfoDesc": "システムで整理された棚のエクセルをアップロードする",
   "uploadNewFishDesc": "新しく購入した魚のエクセルの概要情報を最初にアップロードする",
   "uploadExcelLabel": "エクセルをアップロード(.xlsx)",
