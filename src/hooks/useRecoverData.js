@@ -4,15 +4,13 @@ import {
   isEmpty, isNull, omitBy
 } from 'lodash-es'
 import getEnvVar from '../utils/getEnvVar'
-import getApiPrefix from '../utils/getApiPrefix'
 
-const host = getEnvVar('VITE_AWS_COMMON_HOST')
-const awsHostPrefix = getApiPrefix()
+const host = getEnvVar('VITE_AWS_COMMON_HOST_V2')
 const useRecoverData = (params, options = {}) => {
   const cleanParams = omitBy(params, isEmpty)
   const isSkip = isNull(cleanParams)
   const qsStr = isSkip ? '' : `?${qs.stringify(cleanParams)}`
-  const url = `${awsHostPrefix}/recoveredata${qsStr}`
+  const url = `/default/recoveredata${qsStr}`
   const {
     data, error, isValidating, isLoading
   } = useSWR(() => (isSkip ? null : ({ url, host })), { suspense: false, ...options })

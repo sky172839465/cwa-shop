@@ -1,6 +1,7 @@
+import { useEffect } from 'react'
 import { Outlet } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { RiBillLine } from 'react-icons/ri'
-import i18n from '../../../i18n'
 import Root from '../../../components/Root'
 import NavBar from '../../../components/NavBar'
 import LangsAction from '../../../components/NavBar/LangsAction'
@@ -25,11 +26,17 @@ const InternalLink = () => {
 
 const SiteLayout = (props) => {
   const { appBaseName } = props
+  const { t, i18n } = useTranslation()
+
+  useEffect(() => {
+    document.title = t('shopLogoTitle')
+  }, [i18n.language, t])
+
   return (
     <Root>
       <NavBar
         appBaseName={appBaseName}
-        title={i18n.t('shopLogoTitle')}
+        title={t('shopLogoTitle')}
         actions={(
           <>
             <InternalLink />

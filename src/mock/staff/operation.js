@@ -4,8 +4,22 @@ import getEnvVar from '../../utils/getEnvVar'
 
 const subPrefix = getEnvVar('VITE_AWS_SHOP_HOST_PREFIX')
 const awsHostPrefix = getApiPrefix(subPrefix)
+const commonV2Host = getEnvVar('VITE_AWS_COMMON_HOST_V2')
 
 export default [
+  {
+    url: `${commonV2Host}/default/betta/get_latest_report`,
+    method: 'post',
+    timeout: 100,
+    response: () => {
+      return {
+        status: 'success',
+        results: {
+          message: '訂單總表生成中，請檢查郵件'
+        }
+      }
+    }
+  },
   {
     url: `${awsHostPrefix}/uploadnewfish`,
     method: 'post',
@@ -79,7 +93,7 @@ export default [
     }
   },
   {
-    url: `${awsHostPrefix}/recoveredata`,
+    url: `${commonV2Host}/default/recoveredata`,
     method: 'get',
     timeout: 100,
     response: () => {

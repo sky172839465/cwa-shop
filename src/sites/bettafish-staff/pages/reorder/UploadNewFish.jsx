@@ -89,11 +89,11 @@ const UploadNewFish = () => {
           <div role='alert' className='alert'>
             <MdInfo size='1.5em' />
             <span>
-              先上傳新購進魚的excel匯總信息
+              {t('uploadNewFishDesc')}
             </span>
           </div>
           <FormRow
-            label='上傳 Excel(.xlsx)'
+            label={t('uploadExcelLabel')}
             error={touched[FORM.EXCEL] && errors[FORM.EXCEL]}
             required
           >
@@ -126,7 +126,7 @@ const UploadNewFish = () => {
               download
             >
               <MdFileDownload />
-              Download
+              {t('download')}
             </a>
             <button
               type='submit'
@@ -134,7 +134,7 @@ const UploadNewFish = () => {
               disabled={isLoading}
             >
               <FaPlus />
-              New item
+              {t('newItem')}
             </button>
           </div>
         </Form>

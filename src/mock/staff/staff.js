@@ -3,10 +3,11 @@ import getEnvVar from '../../utils/getEnvVar'
 
 const subPrefix = getEnvVar('VITE_AWS_SHOP_HOST_PREFIX')
 const awsHostPrefix = getApiPrefix(subPrefix)
+const commonV2Host = getEnvVar('VITE_AWS_COMMON_HOST_V2')
 
 export default [
   {
-    url: `${awsHostPrefix}/getstafflist`,
+    url: `${commonV2Host}/default/getstafflist`,
     method: 'get',
     timeout: 100,
     response: () => {
@@ -31,7 +32,7 @@ export default [
     }
   },
   {
-    url: `${awsHostPrefix}/requestrecovery`,
+    url: `${commonV2Host}/default/requestrecovery`,
     method: 'get',
     timeout: 100,
     response: () => {
@@ -47,7 +48,7 @@ export default [
     }
   },
   {
-    url: `${awsHostPrefix}/requestrecovery`,
+    url: `${commonV2Host}/default/requestrecovery`,
     method: 'post',
     timeout: 100,
     response: () => {
@@ -63,26 +64,11 @@ export default [
     }
   },
   {
-    url: `${awsHostPrefix}/recoveryauth`,
+    url: `${commonV2Host}/default/recoveryauth`,
     method: 'get',
     timeout: 100,
     response: () => {
       return '<html><body><h1>Authorization Successful</h1></body></html>'
     }
   },
-  {
-    url: `${awsHostPrefix}/recoveredata`,
-    method: 'post',
-    timeout: 100,
-    response: ({ body }) => {
-      const { recovery_point } = body
-      return {
-        status: 'success',
-        results: {
-          message: '數據恢復成功',
-          recovered_to: recovery_point
-        }
-      }
-    }
-  }
 ]

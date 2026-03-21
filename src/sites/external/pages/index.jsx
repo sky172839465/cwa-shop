@@ -198,6 +198,7 @@ const Home = () => {
   const [targetProduct, setTargetProduct] = useState({})
   const [selectProducts] = useAtom(selectedProductsState)
   const { i18n } = useTranslation()
+
   const { fishTypes } = useFishTypes(i18n.language)
   const [searchParams] = useSearchParams()
   const fishType = useMemo(
