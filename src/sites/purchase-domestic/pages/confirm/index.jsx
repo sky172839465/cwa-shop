@@ -287,7 +287,9 @@ const Confirm = () => {
                                 </td>
                                 <td>
                                   <p>
-                                    {`${quantity} 組`}
+                                    <span>
+                                      {`${quantity} 組`}
+                                    </span>
                                     <span className='ml-1 text-sm text-gray-500'>
                                       {`/ 共 ${quantity * (item.group || 1)} 隻`}
                                     </span>
