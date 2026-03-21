@@ -357,8 +357,8 @@ const Confirm = () => {
                       </div>
                     </div>
                   </div>
-                  <div className='m-2 flex justify-between'>
-                    <div className='flex flex-col gap-2'>
+                  <div className='m-2 flex justify-between gap-4'>
+                    <div className='grid grid-cols-2 gap-x-8 gap-y-2'>
                       <div className='flex break-all text-sm'>
                         總折扣：
                         <br />
@@ -366,6 +366,7 @@ const Confirm = () => {
                           {`${new Intl.NumberFormat('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 }).format(totalDiscount)} NTD`}
                         </span>
                       </div>
+                      <div />
                       <div className='flex break-all text-sm'>
                         總金額：
                         <br />
@@ -373,7 +374,7 @@ const Confirm = () => {
                           {`${new Intl.NumberFormat('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 }).format(totalPrice)} NTD`}
                         </span>
                       </div>
-                      <div className='flex break-all text-sm'>
+                      <div className='flex break-all text-sm font-bold'>
                         {`${t('actualPaymentAmount')}：`}
                         <br />
                         <span className={clx({ 'skeleton text-transparent': isLoading })}>
