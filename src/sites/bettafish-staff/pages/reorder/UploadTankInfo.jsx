@@ -169,7 +169,7 @@ const UploadTankInfo = () => {
                 type='button'
                 className='btn btn-outline pointer-events-none'
               >
-                {`${recoveryStatus} + ${recoveryStaffName}`}
+                {`(${recoveryStaffName}) ${recoveryStatus}`}
               </button>
             )}
             <div className='dropdown dropdown-top dropdown-hover'>
