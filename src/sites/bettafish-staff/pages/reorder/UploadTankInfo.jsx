@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { Formik, Form, Field } from 'formik'
 import { MdInfo } from 'react-icons/md'
 import { FaPlus } from 'react-icons/fa6'
@@ -21,6 +21,7 @@ import useRecoverData from '../../../../hooks/useRecoverData'
 import useCreateUploadTankInfo from '../../../../hooks/useCreateUploadTankInfo'
 import useGetStaffList from '../../../../hooks/useGetStaffList'
 import useRequestRecovery from '../../../../hooks/useRequestRecovery'
+import useGetRecoveryStatus from '../../../../hooks/useGetRecoveryStatus'
 import Modal from '../../../../components/Modal'
 
 const FORM = {
@@ -43,11 +44,19 @@ const UploadTankInfo = () => {
   const [targetRecoveryPoint, setTargetRecoveryPoint] = useState(null)
   const { data: recoverDataResult } = useRecoverData()
   const { trigger: createUploadTankInfo, isMutating: isLoading } = useCreateUploadTankInfo()
-  const { data: staffListData } = useGetStaffList()
+  const { trigger: getStaffList, data: staffListData } = useGetStaffList()
   const { trigger: requestRecovery } = useRequestRecovery()
-  const staffList = get(staffListData, 'results.staff_list', [])
+  const { trigger: getRecoveryStatus, data: recoveryStatusData } = useGetRecoveryStatus()
+  const staffList = get(staffListData, 'staff_list', [])
+  const recoveryStatus = get(recoveryStatusData, 'request_status', '')
+  const recoveryStaffName = get(recoveryStatusData, 'staff_name', '')
   const recoverData = get(recoverDataResult, 'results.data', [])
   const [, setJsonBlock] = useJsonBlock()
+
+  useEffect(() => {
+    getStaffList()
+    getRecoveryStatus()
+  }, [getStaffList, getRecoveryStatus])
 
   const onDropExcels = (excelFiles) => {
     const isAcceptFile = isUndefined(get(excelFiles, '0.code')) && !isEmpty(excelFiles)
@@ -159,15 +168,23 @@ const UploadTankInfo = () => {
             >
               reset
             </button>
+            {recoveryStatus && (
+              <button
+                type='button'
+                className='btn btn-outline btn-disabled'
+              >
+                {`${recoveryStatus} + ${recoveryStaffName}`}
+              </button>
+            )}
             <div className='dropdown dropdown-top dropdown-hover'>
               <div
                 tabIndex={0}
                 role='button'
                 className={clx('btn btn-outline', {
-                    'btn-disabled': isEmpty(recoverData)
+                  'btn-disabled': isEmpty(recoverData)
                 })}
               >
-                  {t('recover')}
+                {t('recover')}
               </div>
               <ul
                 tabIndex={-1}

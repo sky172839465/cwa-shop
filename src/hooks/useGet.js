@@ -1,11 +1,13 @@
 import { get } from 'lodash-es'
 import useSWRMutation from 'swr/mutation'
 
-const useGet = (host) => {
+const useGet = (args) => {
+  const host = get(args, 'host', args)
+  const url = get(args, 'url')
   const options = {}
   const {
     data: defaultData = [], error, isMutating, trigger
-  } = useSWRMutation(() => ({ host, options }), { keepPreviousData: false })
+  } = useSWRMutation(() => ({ host, url, options }), { keepPreviousData: false })
   const data = get(defaultData, 'results', defaultData)
   return {
     data,

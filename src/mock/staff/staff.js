@@ -19,9 +19,14 @@ export default [
               staff_email: 'zhang.san@company.com'
             },
             {
-              staff_id: 'staff_001',
+              staff_id: 'user002',
               staff_name: '李四',
               staff_email: 'li.si@company.com'
+            },
+            {
+              staff_id: 'user003',
+              staff_name: '王五',
+              staff_email: 'wang.wu@company.com'
             }
           ]
         }
