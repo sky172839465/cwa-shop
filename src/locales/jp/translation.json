@@ -16,5 +16,13 @@
   "totalSelected": "合計個数",
   "orderList": "購入リスト",
   "submitCart": "注文内容確認",
-  "removerAll": "オールクリア"
+  "removerAll": "オールクリア",
+  "actualPaymentAmount": "実際の支払金額",
+  "minPurchaseQuantity": "最低注文数（個/セット）",
+  "purchaseInGroups": "セット購入",
+  "unlimited": "無制限",
+  "apiResponse": "APIレスポンス",
+  "quotationStaffTitle": "見積スタッフ",
+  "demand-order": "需要オーダー",
+  "quotation": "見積書"
 }

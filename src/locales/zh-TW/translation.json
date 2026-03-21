@@ -16,5 +16,13 @@
   "totalSelected": "數量",
   "orderList": "購買清單",
   "submitCart": "訂單確認",
-  "removerAll": "全部刪除"
+  "removerAll": "全部刪除",
+  "actualPaymentAmount": "實際付款金額",
+  "minPurchaseQuantity": "最低訂購量 (隻/組)",
+  "purchaseInGroups": "按組購買",
+  "unlimited": "無上限",
+  "apiResponse": "系統響應",
+  "quotationStaffTitle": "報價單系統員工操作界面",
+  "demand-order": "需求單",
+  "quotation": "報價單"
 }

@@ -16,5 +16,13 @@
   "totalSelected": "Total piece",
   "orderList": "List",
   "submitCart": "SUBMIT CART",
-  "removerAll": "REMOVE ALL"
+  "removerAll": "REMOVE ALL",
+  "actualPaymentAmount": "Actual Payment Amount",
+  "minPurchaseQuantity": "Minimum Purchase Quantity (Piece/Set)",
+  "purchaseInGroups": "Purchase in Groups",
+  "unlimited": "Unlimited",
+  "apiResponse": "API response",
+  "quotationStaffTitle": "Quotation Staff",
+  "demand-order": "Demand Order",
+  "quotation": "Quotation"
 }

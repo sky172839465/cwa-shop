@@ -244,7 +244,7 @@ const Confirm = () => {
                             <td>品名</td>
                             <td>尺寸</td>
                             <td>單價</td>
-                            <td className='min-w-32'>購買數量</td>
+                            <td className='min-w-48'>購買數量 (組/隻)</td>
                             <td>特殊要求</td>
                             <td>金額</td>
                             <th />
@@ -286,7 +286,12 @@ const Confirm = () => {
                                   <p>{unit_price}</p>
                                 </td>
                                 <td>
-                                  <p>{quantity}</p>
+                                  <p>
+                                    {`${quantity} 組`}
+                                    <span className='ml-1 text-sm text-gray-500'>
+                                      {`/ 共 ${quantity * (item.group || 1)} 隻`}
+                                    </span>
+                                  </p>
                                 </td>
                                 <td>
                                   <p>{request}</p>
@@ -366,6 +371,13 @@ const Confirm = () => {
                         <br />
                         <span className={clx({ 'skeleton text-transparent': isLoading })}>
                           {`${new Intl.NumberFormat('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 }).format(totalPrice)} NTD`}
+                        </span>
+                      </div>
+                      <div className='flex break-all text-sm'>
+                        {`${t('actualPaymentAmount')}：`}
+                        <br />
+                        <span className={clx({ 'skeleton text-transparent': isLoading })}>
+                          {`${new Intl.NumberFormat('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 }).format(totalPrice - totalDiscount)} NTD`}
                         </span>
                       </div>
                     </div>
