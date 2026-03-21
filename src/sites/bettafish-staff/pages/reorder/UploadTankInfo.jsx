@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from 'react'
+import { useRef, useState } from 'react'
 import { Formik, Form, Field } from 'formik'
 import { MdInfo } from 'react-icons/md'
 import { FaPlus } from 'react-icons/fa6'
@@ -44,19 +44,14 @@ const UploadTankInfo = () => {
   const [targetRecoveryPoint, setTargetRecoveryPoint] = useState(null)
   const { data: recoverDataResult } = useRecoverData()
   const { trigger: createUploadTankInfo, isMutating: isLoading } = useCreateUploadTankInfo()
-  const { trigger: getStaffList, data: staffListData } = useGetStaffList()
+  const { data: staffListData } = useGetStaffList()
   const { trigger: requestRecovery } = useRequestRecovery()
-  const { trigger: getRecoveryStatus, data: recoveryStatusData } = useGetRecoveryStatus()
+  const { data: recoveryStatusData, mutate: mutateRecoveryStatus } = useGetRecoveryStatus()
   const staffList = get(staffListData, 'staff_list', [])
   const recoveryStatus = get(recoveryStatusData, 'request_status', '')
   const recoveryStaffName = get(recoveryStatusData, 'staff_name', '')
   const recoverData = get(recoverDataResult, 'results.data', [])
   const [, setJsonBlock] = useJsonBlock()
-
-  useEffect(() => {
-    getStaffList()
-    getRecoveryStatus()
-  }, [getStaffList, getRecoveryStatus])
 
   const onDropExcels = (excelFiles) => {
     const isAcceptFile = isUndefined(get(excelFiles, '0.code')) && !isEmpty(excelFiles)
@@ -123,7 +118,7 @@ const UploadTankInfo = () => {
 
     toast.success(get(result, 'results.message', 'Success'), { id: toastId })
     modalRef.current.close()
-    getRecoveryStatus()
+    mutateRecoveryStatus()
   }
 
   return (
@@ -182,7 +177,7 @@ const UploadTankInfo = () => {
                 tabIndex={0}
                 role='button'
                 className={clx('btn btn-outline', {
-                  'btn-disabled': isEmpty(recoverData)
+                  'btn-disabled': isEmpty(recoverData) || recoveryStatus === 'pending'
                 })}
               >
                 {t('recover')}
@@ -190,7 +185,7 @@ const UploadTankInfo = () => {
               <ul
                 tabIndex={-1}
                 className={clx('menu dropdown-content z-[1] w-52 rounded-box bg-base-100 p-2 shadow', {
-                    hidden: isEmpty(recoverData)
+                  hidden: isEmpty(recoverData) || recoveryStatus === 'pending'
                 })}
               >
                 {recoverData.map((item, index) => {
