@@ -4,6 +4,7 @@ import safeJSON from '../../utils/safeJSON'
 import useJsonBlock from './useJsonBlock'
 
 const JsonBlock = ({ className }) => {
+  const { t } = useTranslation()
   const [json] = useJsonBlock()
   const { t } = useTranslation()
   return (
