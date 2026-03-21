@@ -52,7 +52,7 @@ const Confirm = () => {
   const [totalPrice, setTotalPrice] = useState(0)
   const [discounts, setDiscounts] = useState([])
   const [items, setItems] = useState(mockItems)
-  const { data = initCart } = usePrepurchaseOrder({
+  const { data = initCart, isLoading: isPrepurchaseOrderLoading } = usePrepurchaseOrder({
     onSuccess: (result) => {
       const newTotalPrice = getTotalPrice(result)
       const newDiscounts = getDiscounts(result)
@@ -109,7 +109,7 @@ const Confirm = () => {
       isDiscountEmpty: newIsDiscountEmpty
     }
   }, [discounts])
-  const isLoading = (isPreorderMutating || isOrderMutating || isCategoryInfoLoading)
+  const isLoading = (isPreorderMutating || isOrderMutating || isCategoryInfoLoading || isPrepurchaseOrderLoading)
   const isDisabled = (isLoading || isSubmitted)
 
   const updateCart = async (newItems) => {
