@@ -12,9 +12,9 @@ const CustomCartItems = (props) => {
     return (
       <p className='flex items-center justify-between gap-2'>
         <span>
-          {`${fishName} x ${quantity}(隻)`}
+          {`${fishName} x ${quantity} (組)`}
           <span className='ml-1 text-sm text-gray-500'>
-            {`(共 ${totalCount}) 隻`}
+            {`/ 共 ${totalCount} 隻`}
           </span>
         </span>
         <MdEdit size='1.2em' />

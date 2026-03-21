@@ -52,7 +52,7 @@ const Confirm = () => {
   const [totalPrice, setTotalPrice] = useState(0)
   const [discounts, setDiscounts] = useState([])
   const [items, setItems] = useState(mockItems)
-  const { data = initCart } = usePrepurchaseOrder({
+  const { data = initCart, isLoading: isPrepurchaseOrderLoading } = usePrepurchaseOrder({
     onSuccess: (result) => {
       const newTotalPrice = getTotalPrice(result)
       const newDiscounts = getDiscounts(result)
@@ -109,7 +109,7 @@ const Confirm = () => {
       isDiscountEmpty: newIsDiscountEmpty
     }
   }, [discounts])
-  const isLoading = (isPreorderMutating || isOrderMutating || isCategoryInfoLoading)
+  const isLoading = (isPreorderMutating || isOrderMutating || isCategoryInfoLoading || isPrepurchaseOrderLoading)
   const isDisabled = (isLoading || isSubmitted)
 
   const updateCart = async (newItems) => {
@@ -244,7 +244,7 @@ const Confirm = () => {
                             <td>品名</td>
                             <td>尺寸</td>
                             <td>單價</td>
-                            <td className='min-w-32'>購買數量</td>
+                            <td className='min-w-48'>購買數量 (組/隻)</td>
                             <td>特殊要求</td>
                             <td>金額</td>
                             <th />
@@ -286,7 +286,14 @@ const Confirm = () => {
                                   <p>{unit_price}</p>
                                 </td>
                                 <td>
-                                  <p>{quantity}</p>
+                                  <p>
+                                    <span>
+                                      {`${quantity} 組`}
+                                    </span>
+                                    <span className='ml-1 text-sm text-gray-500'>
+                                      {`/ 共 ${quantity * (item.group || 1)} 隻`}
+                                    </span>
+                                  </p>
                                 </td>
                                 <td>
                                   <p>{request}</p>
@@ -352,8 +359,8 @@ const Confirm = () => {
                       </div>
                     </div>
                   </div>
-                  <div className='m-2 flex justify-between'>
-                    <div className='flex flex-col gap-2'>
+                  <div className='m-2 flex justify-between gap-4'>
+                    <div className='grid grid-cols-2 gap-x-8 gap-y-2'>
                       <div className='flex break-all text-sm'>
                         總折扣：
                         <br />
@@ -361,11 +368,19 @@ const Confirm = () => {
                           {`${new Intl.NumberFormat('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 }).format(totalDiscount)} NTD`}
                         </span>
                       </div>
+                      <div />
                       <div className='flex break-all text-sm'>
                         總金額：
                         <br />
                         <span className={clx({ 'skeleton text-transparent': isLoading })}>
                           {`${new Intl.NumberFormat('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 }).format(totalPrice)} NTD`}
+                        </span>
+                      </div>
+                      <div className='flex break-all text-sm font-bold'>
+                        {`${t('actualPaymentAmount')}：`}
+                        <br />
+                        <span className={clx({ 'skeleton text-transparent': isLoading })}>
+                          {`${new Intl.NumberFormat('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 }).format(totalPrice - totalDiscount)} NTD`}
                         </span>
                       </div>
                     </div>

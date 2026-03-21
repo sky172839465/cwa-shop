@@ -35,7 +35,7 @@ const CustomCartBottomItems = (props) => {
     </details>,
     `${t('totalCount')}: ${new Intl.NumberFormat('en-US').format(safeTotalQuantity)}`,
     `${t('totalPrice')}: ${`${new Intl.NumberFormat('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 }).format(safeTotalPrice)}`}`,
-    `實際付款金額: ${safeTrueTotalPrice}`
+    `${t('actualPaymentAmount')}: ${new Intl.NumberFormat('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 }).format(safeTrueTotalPrice)}`
   ]
   return (
     <CartBottomItems

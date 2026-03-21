@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom'
 import { flow, keys } from 'lodash-es'
+import { useTranslation } from 'react-i18next'
 import Portal from '../../../components/Portal'
 
-const links = flow(
+const getLinks = () => flow(
   () => keys(import.meta.glob('./**/index.jsx')),
   (paths) => paths.map((path) => {
     return path.replace('../', '/').replace('/index.jsx', '')
@@ -14,6 +15,8 @@ const links = flow(
 )()
 
 const Demo = () => {
+  const { t } = useTranslation()
+  const links = getLinks()
   return (
     <Portal isFixed>
       {links.map((link) => {
@@ -23,7 +26,7 @@ const Demo = () => {
             to={link.url}
             className='btn btn-outline btn-lg'
           >
-            {link.name}
+            {t(link.name)}
           </Link>
         )
       })}
