@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react'
-import { Formik, Form } from 'formik'
+import { Formik, Form, Field } from 'formik'
 import { MdInfo } from 'react-icons/md'
 import { FaPlus } from 'react-icons/fa6'
 import { useTranslation } from 'react-i18next'
@@ -19,10 +19,17 @@ import getFormValues from '../../../../utils/getFormValues'
 import useJsonBlock from '../../../../components/JsonBlock/useJsonBlock'
 import useRecoverData from '../../../../hooks/useRecoverData'
 import useCreateUploadTankInfo from '../../../../hooks/useCreateUploadTankInfo'
-import useCreateRecoverData from '../../../../hooks/useCreateRecoverData'
+import useGetStaffList from '../../../../hooks/useGetStaffList'
+import useRequestRecovery from '../../../../hooks/useRequestRecovery'
+import useGetRecoveryStatus from '../../../../hooks/useGetRecoveryStatus'
+import Modal from '../../../../components/Modal'
 
 const FORM = {
   EXCEL: 'excel'
+}
+
+const RECOVERY_FORM = {
+  STAFF_ID: 'staff_id'
 }
 
 const validationSchema = Yup.object().shape({
@@ -32,13 +39,17 @@ const validationSchema = Yup.object().shape({
 const UploadTankInfo = () => {
   const { t } = useTranslation()
   const resetBtn = useRef()
+  const modalRef = useRef()
   const [isExcelUploaded, setIsExcelUploaded] = useState(false)
+  const [targetRecoveryPoint, setTargetRecoveryPoint] = useState(null)
   const { data: recoverDataResult } = useRecoverData()
   const { trigger: createUploadTankInfo, isMutating: isLoading } = useCreateUploadTankInfo()
-  const {
-    isMutating: isRecoverDataLoading,
-    trigger: createRecoverData
-  } = useCreateRecoverData()
+  const { data: staffListData } = useGetStaffList()
+  const { trigger: requestRecovery } = useRequestRecovery()
+  const { data: recoveryStatusData, mutate: mutateRecoveryStatus } = useGetRecoveryStatus()
+  const staffList = get(staffListData, 'staff_list', [])
+  const recoveryStatus = get(recoveryStatusData, 'request_status', '')
+  const recoveryStaffName = get(recoveryStatusData, 'staff_name', '')
   const recoverData = get(recoverDataResult, 'results.data', [])
   const [, setJsonBlock] = useJsonBlock()
 
@@ -81,14 +92,20 @@ const UploadTankInfo = () => {
     setIsExcelUploaded(false)
   }
 
-  const onRecover = async (recovery_point) => {
-    const toastId = toast.loading(`恢復至 ${recovery_point} 中...`)
-    const [createError, result] = await safeAwait(createRecoverData({
-      recovery_point
+  const onRecoverClick = (recovery_point) => {
+    setTargetRecoveryPoint(recovery_point)
+    modalRef.current.open()
+  }
+
+  const onConfirmRecovery = async (values) => {
+    const toastId = toast.loading(`${t('recover')}...`)
+    const [error, result] = await safeAwait(requestRecovery({
+      recovery_time: targetRecoveryPoint,
+      staff_id: values[RECOVERY_FORM.STAFF_ID]
     }))
     setJsonBlock(result)
-    if (createError) {
-      toast.error(`${createError.message}`, { id: toastId })
+    if (error) {
+      toast.error(error.message, { id: toastId })
       return
     }
 
@@ -99,10 +116,13 @@ const UploadTankInfo = () => {
       return
     }
 
-    toast.success(`恢復至 ${recovery_point} 成功!`, { id: toastId })
+    toast.success(get(result, 'results.message', 'Success'), { id: toastId })
+    modalRef.current.close()
+    mutateRecoveryStatus()
   }
 
   return (
+    <>
     <Formik
       initialValues={{
         [FORM.EXCEL]: []
@@ -115,11 +135,11 @@ const UploadTankInfo = () => {
           <div role='alert' className='alert'>
             <MdInfo size='1.5em' />
             <span>
-              上傳系統排好的櫃位excel
+              {t('uploadTankInfoDesc')}
             </span>
           </div>
           <FormRow
-            label='上傳 Excel(.xlsx)'
+            label={t('uploadExcelLabel')}
             error={touched[FORM.EXCEL] && errors[FORM.EXCEL]}
             required
           >
@@ -144,27 +164,35 @@ const UploadTankInfo = () => {
             >
               reset
             </button>
+            {recoveryStatus && (
+              <button
+                type='button'
+                className='btn btn-outline pointer-events-none'
+              >
+                {`(${recoveryStaffName}) ${recoveryStatus}`}
+              </button>
+            )}
             <div className='dropdown dropdown-top dropdown-hover'>
               <div
                 tabIndex={0}
                 role='button'
                 className={clx('btn btn-outline', {
-                  'btn-disabled': isEmpty(recoverData) || isRecoverDataLoading
+                  'btn-disabled': isEmpty(recoverData) || recoveryStatus === 'pending'
                 })}
               >
-                Recover
+                {t('recover')}
               </div>
               <ul
                 tabIndex={-1}
                 className={clx('menu dropdown-content z-[1] w-52 rounded-box bg-base-100 p-2 shadow', {
-                  hidden: isEmpty(recoverData) || isRecoverDataLoading
+                  hidden: isEmpty(recoverData) || recoveryStatus === 'pending'
                 })}
               >
                 {recoverData.map((item, index) => {
                   return (
                     <li
                       key={index}
-                      onClick={() => onRecover(item)}
+                        onClick={() => onRecoverClick(item)}
                     >
                       <span>{item}</span>
                     </li>
@@ -178,12 +206,58 @@ const UploadTankInfo = () => {
               disabled={isLoading}
             >
               <FaPlus />
-              New item
+                {t('newItem')}
             </button>
           </div>
         </Form>
       )}
     </Formik>
+      <Formik
+        initialValues={{ [RECOVERY_FORM.STAFF_ID]: '' }}
+        validationSchema={Yup.object().shape({
+          [RECOVERY_FORM.STAFF_ID]: Yup.string().required('Required')
+        })}
+        onSubmit={onConfirmRecovery}
+      >
+        {() => (
+          <Modal
+            id='recovery-confirm-modal'
+            title={t('dataRecoveryConfirmation')}
+            modalRef={modalRef}
+            isFormModal
+            okText={t('confirm')}
+            closeText={t('cancel')}
+          >
+            {(actions) => (
+              <Form className='flex flex-col gap-4'>
+                <div className='alert alert-error'>
+                  <MdInfo size='1.5em' />
+                  <span>{targetRecoveryPoint}</span>
+                </div>
+                <div className='text-sm text-gray-500'>
+                  {t('recoveryAuthDescription')}
+                </div>
+                <FormRow label={t('selectStaff')} required>
+                  <Field
+                    as='select'
+                    name={RECOVERY_FORM.STAFF_ID}
+                    className='select select-bordered w-full'
+                  >
+                    <option value='' disabled>{t('selectStaff')}</option>
+                    {staffList.map((staff) => (
+                      <option key={staff.staff_id} value={staff.staff_id}>
+                        {`(${staff.staff_id}) ${staff.staff_name}`}
+                      </option>
+                    ))}
+                  </Field>
+                </FormRow>
+                {actions}
+              </Form>
+            )}
+          </Modal>
+        )}
+      </Formik>
+    </>
   )
 }
 

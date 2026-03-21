@@ -1,12 +1,10 @@
-import getApiPrefix from '../../utils/getApiPrefix'
 import getEnvVar from '../../utils/getEnvVar'
 
-const subPrefix = getEnvVar('VITE_AWS_SHOP_HOST_PREFIX')
-const awsHostPrefix = getApiPrefix(subPrefix)
+const commonV2Host = getEnvVar('VITE_AWS_COMMON_HOST_V2')
 
 export default [
   {
-    url: `${awsHostPrefix}/getstafflist`,
+    url: `${commonV2Host}/default/getstafflist`,
     method: 'get',
     timeout: 100,
     response: () => {
@@ -21,9 +19,14 @@ export default [
               staff_email: 'zhang.san@company.com'
             },
             {
-              staff_id: 'staff_001',
+              staff_id: 'user002',
               staff_name: '李四',
               staff_email: 'li.si@company.com'
+            },
+            {
+              staff_id: 'user003',
+              staff_name: '王五',
+              staff_email: 'wang.wu@company.com'
             }
           ]
         }
@@ -31,15 +34,17 @@ export default [
     }
   },
   {
-    url: `${awsHostPrefix}/requestrecovery`,
+    url: `${commonV2Host}/default/requestrecovery`,
     method: 'get',
     timeout: 100,
     response: () => {
+      const statuses = ['pending', 'approved', 'rejected', 'expired']
+      const status = statuses[Math.floor(Math.random() * statuses.length)]
       return {
         status: 'success',
         results: {
           message: '成功獲取請求狀態',
-          request_status: 'pending',
+          request_status: status,
           staff_id: 'staff_001',
           staff_name: '李四'
         }
@@ -47,7 +52,7 @@ export default [
     }
   },
   {
-    url: `${awsHostPrefix}/requestrecovery`,
+    url: `${commonV2Host}/default/requestrecovery`,
     method: 'post',
     timeout: 100,
     response: () => {
@@ -63,26 +68,11 @@ export default [
     }
   },
   {
-    url: `${awsHostPrefix}/recoveryauth`,
+    url: `${commonV2Host}/default/recoveryauth`,
     method: 'get',
     timeout: 100,
     response: () => {
       return '<html><body><h1>Authorization Successful</h1></body></html>'
-    }
-  },
-  {
-    url: `${awsHostPrefix}/recoveredata`,
-    method: 'post',
-    timeout: 100,
-    response: ({ body }) => {
-      const { recovery_point } = body
-      return {
-        status: 'success',
-        results: {
-          message: '數據恢復成功',
-          recovered_to: recovery_point
-        }
-      }
     }
   }
 ]

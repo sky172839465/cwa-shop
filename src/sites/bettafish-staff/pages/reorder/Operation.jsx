@@ -2,12 +2,14 @@ import {
   get,
   isEmpty
 } from 'lodash-es'
+import { useTranslation } from 'react-i18next'
 import toast from 'react-hot-toast'
 import safeAwait from 'safe-await'
 import useCreateUploadTankInfo from '../../../../hooks/useCreateUploadTankInfo'
 import useBettaFishSystemState from '../../../../hooks/useBettaFishSystemState'
 import useCreateBettaFishSystemState from '../../../../hooks/useCreateBettaFishSystemState'
 import useJsonBlock from '../../../../components/JsonBlock/useJsonBlock'
+import useGetLatestReport from '../../../../hooks/useGetLatestReport'
 
 const SYSTEM_TYPE = {
   INTERNAL: 'internal',
@@ -96,15 +98,30 @@ const Option = (props) => {
 }
 
 const Operation = () => {
+  const { t } = useTranslation()
+  const { trigger: getLatestReport, isMutating: isGenerating } = useGetLatestReport()
+  const [, setJsonBlock] = useJsonBlock()
+
+  const onGenerateLatestReport = async () => {
+    const toastId = toast.loading(`${t('generateLatestReport')}...`)
+    const [error, result] = await safeAwait(getLatestReport())
+    setJsonBlock(result)
+    if (error) {
+      toast.error(error.message, { id: toastId })
+      return
+    }
+    toast.success(get(result, 'results.message', 'Success'), { id: toastId })
+  }
+
   return (
     <div className='alert flex w-full flex-col items-start gap-4'>
       <div className='flex w-full flex-col gap-4 rounded-md bg-white px-2 py-1'>
         <Option
-          label='開啟鬥魚內部平台'
+          label={t('openInternalPlatform')}
           systemType={SYSTEM_TYPE.INTERNAL}
         />
         <Option
-          label='開啟鬥魚外部平台'
+          label={t('openExternalPlatform')}
           systemType={SYSTEM_TYPE.EXTERNAL}
         />
       </div>
@@ -113,14 +130,23 @@ const Operation = () => {
         href='https://bettafish4test.uniheart.com.tw/'
         className='btn btn-outline w-full'
       >
-        進入鬥魚內部系統
+        {t('enterInternalSystem')}
       </a>
       <a
         href='https://bettafish.uniheart.com.tw/'
         className='btn btn-outline w-full'
       >
-        進入鬥魚外部系統
+        {t('enterExternalSystem')}
       </a>
+      <div className='divider !my-0 w-full' />
+      <button
+        type='button'
+        className='btn btn-outline w-full'
+        onClick={onGenerateLatestReport}
+        disabled={isGenerating}
+      >
+        {t('generateLatestReport')}
+      </button>
     </div>
   )
 }
