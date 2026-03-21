@@ -45,7 +45,6 @@ const getSystemState = (data) => {
 
 const Option = (props) => {
   const { label, systemType } = props
-  const { t } = useTranslation()
   const { isMutating: isLoading } = useCreateUploadTankInfo()
   const { data: bettaFishSystemStateData } = useBettaFishSystemState({ system_type: systemType })
   const {

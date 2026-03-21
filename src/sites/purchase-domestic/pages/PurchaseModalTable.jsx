@@ -2,10 +2,12 @@ import { Field, useFormikContext } from 'formik'
 import clx from 'classnames'
 import { isEmpty } from 'lodash-es'
 import { FaEye } from 'react-icons/fa'
+import { useTranslation } from 'react-i18next'
 import { FORM_ITEM } from './constants'
 import FieldError from '../../../components/Form/FieldError'
 
 const PurchaseModalTable = (props) => {
+  const { t } = useTranslation()
   const { isAddToCart, disabled } = props
   const { values } = useFormikContext()
   const editable = (!disabled && isAddToCart)
@@ -57,14 +59,14 @@ const PurchaseModalTable = (props) => {
           </tr>
           <tr>
             <td>在庫量</td>
-            <td>{inventory === -1 ? '無上限' : inventory}</td>
+            <td>{inventory === -1 ? t('unlimited') : inventory}</td>
           </tr>
           <tr>
-            <td>最低訂購量 (隻/組)</td>
+            <td>{t('minPurchaseQuantity')}</td>
             <td>{min_purchase_quantity}</td>
           </tr>
           <tr>
-            <td>按組購買</td>
+            <td>{t('purchaseInGroups')}</td>
             <td>{`${group} 隻/組`}</td>
           </tr>
           <tr>
@@ -72,7 +74,7 @@ const PurchaseModalTable = (props) => {
             <td>{note}</td>
           </tr>
           <tr>
-            <td>購買數量</td>
+            <td>購買數量 (組)</td>
             <td>
               <FieldError name={FORM_ITEM.QUANTITY}>
                 <div className='join'>
@@ -85,13 +87,13 @@ const PurchaseModalTable = (props) => {
                       { '!text-black': !editable }
                     )}
                     min={min_purchase_quantity}
-                    placeholder={inventory === -1 ? '無上限' : ''}
+                    placeholder={inventory === -1 ? t('unlimited') : ''}
                     disabled={!editable}
                     autoComplete='off'
                   />
                   <input
                     className='input join-item input-bordered min-w-[130px]'
-                    value={`(組) 共 ${quantity * group} 隻`}
+                    value={`(組) / 共 ${quantity * group} 隻`}
                     readOnly
                   />
                 </div>

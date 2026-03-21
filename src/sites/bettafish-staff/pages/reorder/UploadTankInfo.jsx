@@ -44,7 +44,7 @@ const UploadTankInfo = () => {
   const { data: recoverDataResult } = useRecoverData()
   const { trigger: createUploadTankInfo, isMutating: isLoading } = useCreateUploadTankInfo()
   const { data: staffListData } = useGetStaffList()
-  const { trigger: requestRecovery, isMutating: isRequestingRecovery } = useRequestRecovery()
+  const { trigger: requestRecovery } = useRequestRecovery()
   const staffList = get(staffListData, 'results.staff_list', [])
   const recoverData = get(recoverDataResult, 'results.data', [])
   const [, setJsonBlock] = useJsonBlock()
@@ -206,7 +206,7 @@ const UploadTankInfo = () => {
         })}
         onSubmit={onConfirmRecovery}
       >
-        {({ values }) => (
+        {() => (
           <Modal
             id='recovery-confirm-modal'
             title={t('dataRecoveryConfirmation')}

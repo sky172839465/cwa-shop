@@ -1,8 +1,5 @@
-import getApiPrefix from '../../utils/getApiPrefix'
 import getEnvVar from '../../utils/getEnvVar'
 
-const subPrefix = getEnvVar('VITE_AWS_SHOP_HOST_PREFIX')
-const awsHostPrefix = getApiPrefix(subPrefix)
 const commonV2Host = getEnvVar('VITE_AWS_COMMON_HOST_V2')
 
 export default [
@@ -70,5 +67,5 @@ export default [
     response: () => {
       return '<html><body><h1>Authorization Successful</h1></body></html>'
     }
-  },
+  }
 ]

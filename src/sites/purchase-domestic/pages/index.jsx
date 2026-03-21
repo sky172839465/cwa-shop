@@ -36,7 +36,7 @@ const initCart = {
 }
 
 const defaultClickRowData = {
-  [FORM_ITEM.QUANTITY]: 0,
+  [FORM_ITEM.QUANTITY]: '',
   [FORM_ITEM.REQUEST]: ''
 }
 
@@ -112,6 +112,7 @@ const PurchaseDomestic = () => {
     }
 
     const rowData = {
+      ...defaultClickRowData,
       [FORM_ITEM.MIN_PURCHASE_QUANTITY]: get(originData, FORM_ITEM.MIN_PURCHASE_QUANTITY, 0),
       [FORM_ITEM.REQUEST]: get(originData, FORM_ITEM.REQUEST, ''),
       ...originData
