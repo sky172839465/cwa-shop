@@ -38,11 +38,13 @@ export default [
     method: 'get',
     timeout: 100,
     response: () => {
+      const statuses = ['pending', 'approved', 'rejected', 'expired']
+      const status = statuses[Math.floor(Math.random() * statuses.length)]
       return {
         status: 'success',
         results: {
           message: '成功獲取請求狀態',
-          request_status: 'pending',
+          request_status: status,
           staff_id: 'staff_001',
           staff_name: '李四'
         }
