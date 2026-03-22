@@ -14,11 +14,11 @@ const getEnvVar = (key) => {
     switch (true) {
       case isStaff:
       case isPurchase: {
-        return window.CURRENT_ENV.VITE_AWS_COMMON_HOST
+        return window.CURRENT_ENV.VITE_AWS_COMMON_HOST_V2
       }
       case isShop:
       default: {
-        return window.CURRENT_ENV.VITE_AWS_COMMON_HOST
+        return window.CURRENT_ENV.VITE_AWS_COMMON_HOST_V2
       }
     }
   }
