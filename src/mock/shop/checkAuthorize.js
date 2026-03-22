@@ -1,4 +1,4 @@
-import { get, isEmpty } from 'lodash-es'
+import { get } from 'lodash-es'
 import getApiPrefix from '../../utils/getApiPrefix'
 import getEnvVar from '../../utils/getEnvVar'
 
@@ -13,12 +13,10 @@ export default [
     statusCode: 200,
     response: (response) => {
       const authorization = get(response, 'headers.authorization')
-      if (isEmpty(authorization)) {
-        // vite-plugin-mock doesn't easily support dynamic status codes in a simple response function
-        // but we can return the error body.
-        return { message: 'Unauthorized', reason: 'Token missing' }
+      if (authorization === 'Bearer MOCK_TOKEN') {
+        return { message: 'MOCK USER' }
       }
-      return { message: 'MOCK USER' }
+      return { message: 'Unauthorized', reason: 'Token missing' }
     }
   }
 ]
