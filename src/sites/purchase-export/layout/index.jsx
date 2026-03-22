@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom'
-import i18n from '../../../i18n'
+import { useTranslation } from 'react-i18next'
 import Root from '../../../components/Root'
 import NavBar from '../../../components/NavBar'
 import LangsAction from '../../../components/NavBar/LangsAction'
@@ -7,12 +7,13 @@ import PurchaseAction from '../../../components/NavBar/PurchaseAction'
 import LogoutAction from '../../../components/NavBar/LogoutAction'
 
 const SiteLayout = (props) => {
+  const { t } = useTranslation()
   const { appBaseName } = props
   return (
     <Root>
       <NavBar
         appBaseName={appBaseName}
-        title={i18n.t('purchaseLogoTitle')}
+        title={t('purchaseLogoTitle')}
         actions={(
           <>
             <LangsAction />
