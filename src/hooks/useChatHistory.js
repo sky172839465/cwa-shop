@@ -10,7 +10,7 @@ import wait from '../utils/wait'
 const chatIdsAtom = atom([])
 const newHistoryAtom = atom([])
 
-const host = getEnvVar('VITE_AWS_COMMON_HOST')
+const host = getEnvVar('VITE_AWS_COMMON_HOST_V2')
 const subPrefix = getEnvVar('VITE_AWS_PURCHASE_HOST_PREFIX')
 const awsHostPrefix = getApiPrefix(subPrefix)
 const url = `${awsHostPrefix}/chathistory`
