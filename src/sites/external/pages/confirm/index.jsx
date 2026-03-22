@@ -168,7 +168,7 @@ const Page = () => {
   return (
     <>
       <div
-        className='m-auto h-auto overflow-x-auto max-lg:max-w-2xl max-sm:min-w-full lg:max-w-5xl'
+        className='m-auto h-auto overflow-x-auto pb-24 max-lg:max-w-2xl max-sm:min-w-full lg:max-w-5xl'
       >
         <table className='table table-pin-cols'>
           <thead>
