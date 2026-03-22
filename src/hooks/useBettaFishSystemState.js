@@ -6,7 +6,7 @@ import {
 import getEnvVar from '../utils/getEnvVar'
 import getApiPrefix from '../utils/getApiPrefix'
 
-const host = getEnvVar('VITE_AWS_COMMON_HOST')
+const host = getEnvVar('VITE_AWS_COMMON_HOST_V2')
 const awsHostPrefix = getApiPrefix()
 
 const useBettaFishSystemState = (params, options = {}) => {

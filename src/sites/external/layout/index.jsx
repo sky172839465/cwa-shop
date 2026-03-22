@@ -7,6 +7,7 @@ import NavBar from '../../../components/NavBar'
 import LangsAction from '../../../components/NavBar/LangsAction'
 import UserAction from '../../../components/NavBar/UserAction'
 import LogoutAction from '../../../components/NavBar/LogoutAction'
+import subPrefix from './subPrefix'
 
 const InternalLink = () => {
   return (
@@ -41,7 +42,7 @@ const SiteLayout = (props) => {
           <>
             <InternalLink />
             <LangsAction />
-            <UserAction fixed />
+            <UserAction fixed subPrefix={subPrefix} />
             <LogoutAction />
           </>
         )}

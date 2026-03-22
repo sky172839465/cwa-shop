@@ -6,7 +6,7 @@ import {
 import getEnvVar from '../utils/getEnvVar'
 import getApiPrefix from '../utils/getApiPrefix'
 
-const nonAuthHost = getEnvVar('VITE_AWS_COMMON_HOST')
+const nonAuthHost = getEnvVar('VITE_AWS_COMMON_HOST_V2')
 const authHost = getEnvVar('VITE_AWS_AUTH_FISH_TYPE_SHOP_HOST')
 const subPrefix = getEnvVar('VITE_AWS_SHOP_HOST_PREFIX')
 const awsHostPrefix = getApiPrefix(subPrefix)
