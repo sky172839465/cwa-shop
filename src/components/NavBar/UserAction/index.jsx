@@ -29,7 +29,7 @@ const UserAction = (props) => {
       return '未登入'
     }
 
-    return data.message
+    return data?.message || '未登入'
   }
 
   return (
