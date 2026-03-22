@@ -66,7 +66,7 @@ export default [
       return {
         status: 'success',
         results: {
-          items: order_items.map(({ fish_code, quantity, request = '', group = '1' }) => {
+          items: order_items.map(({ fish_code, quantity, request = '', group = `${random(1, 5)}` }) => {
             return {
               fish_code,
               fish_name: `fish_name_${fish_code}`,
