@@ -1,52 +1,25 @@
-import { Suspense } from 'react'
-import { Await, useLoaderData } from 'react-router-dom'
+import { useLoaderData } from 'react-router-dom'
 import { FaUserCircle } from 'react-icons/fa'
-import useSWR from 'swr'
-import getEnvVar from '../../../utils/getEnvVar'
-import getApiPrefix from '../../../utils/getApiPrefix'
-
-const User = () => {
-  const data = useLoaderData()
-  return (
-    <Suspense fallback={<span>Loading</span>}>
-      <Await
-        resolve={data.message}
-        errorElement={<span>Error</span>}
-      >
-        {(message) => message}
-      </Await>
-    </Suspense>
-  )
-}
 
 const UserAction = (props) => {
   const { fixed, subPrefix } = props
-  const host = getEnvVar('VITE_AWS_CHECK_AUTHORIZE')
-  const awsHostPrefix = getApiPrefix(subPrefix)
   const isEnabled = typeof subPrefix === 'string'
-  const { data, error, isLoading } = useSWR(
-    isEnabled ? { host, url: `${awsHostPrefix}/checkAuthorize` } : null
-  )
+  const data = useLoaderData()
+  const message = data?.message
 
   const getTip = () => {
     if (!isEnabled) {
       return `v${window.APP_VERSION}`
     }
 
-    if (isLoading) {
-      return '載入中'
-    }
-
-    if (error) {
-      return '發生錯誤'
-    }
-
-    if (data?.message === 'Unauthorized' || !data?.message) {
+    if (message === 'Unauthorized' || !message) {
       return '未登入'
     }
 
-    return data.message
+    return message
   }
+
+  const userMessage = (message === 'Unauthorized' || !message) ? '' : message
 
   return (
     <div className='btn btn-ghost'>
@@ -55,7 +28,7 @@ const UserAction = (props) => {
         data-tip={getTip()}
       >
         <span className='max-sm:hidden'>
-          {fixed ? <FaUserCircle size='1.5em' /> : <User />}
+          {fixed || !userMessage ? <FaUserCircle size='1.5em' /> : userMessage}
         </span>
         <FaUserCircle className='md:hidden' size='1.5em' />
       </div>
