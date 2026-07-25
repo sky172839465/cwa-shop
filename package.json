@@ -79,7 +79,7 @@
     "husky": "^8.0.3",
     "lint-staged": "^15.2.7",
     "mockjs": "^1.1.0",
-    "postcss": "^8.5.14",
+    "postcss": "^8.5.23",
     "prettier": "^3.3.2",
     "prettier-plugin-sh": "^0.14.0",
     "stylelint": "^16.6.1",
