@@ -42,7 +42,7 @@
     "match-sorter": "^6.3.1",
     "motion": "^12.23.12",
     "p-queue": "npm:@esm2cjs/p-queue@^7.3.0",
-    "query-string": "^8.1.0",
+    "query-string": "^9.5.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-dropzone": "^14.2.3",
